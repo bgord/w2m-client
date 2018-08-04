@@ -14,29 +14,30 @@ const db_name = "w2m";
 const server_port = 8787;
 
 (async () => {
-  try {
-    const client = await MongoClient.connect(
-      uri,
-      { useNewUrlParser: true }
-    );
+	try {
+		const client = await MongoClient.connect(
+			uri,
+			{ useNewUrlParser: true }
+		);
 
-    const db = client.db(db_name);
+		const db = client.db(db_name);
 
-    app.use(cors());
-    app.get("/words", async (req, res) => {
-      const activeWords = await db
-        .collection("words")
-        .find({
-          archived: false,
-        })
-        .toArray();
-      return res.status(200).send({ response: activeWords });
-    });
+		app.use(cors());
+		app.get("/words", async (req, res) => {
+			const activeWords = await db
+				.collection("words")
+				.find({
+					archived: false,
+				})
+				.limit(20)
+				.toArray();
+			return res.status(200).send({ response: activeWords });
+		});
 
-    app.listen(server_port, () =>
-      console.log(`Listening on port ${server_port}`)
-    );
-  } catch (e) {
-    console.error(e);
-  }
+		app.listen(server_port, () =>
+			console.log(`Listening on port ${server_port}`)
+		);
+	} catch (e) {
+		console.error(e);
+	}
 })();
