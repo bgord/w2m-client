@@ -59,6 +59,16 @@ $almost-white: #fcfefb;
     justify-content: space-between;
 }
 
+@mixin left() {
+    display: flex;
+    justify-content: flex-start;
+}
+
+@mixin right() {
+    display: flex;
+    justify-content: flex-end;
+}
+
 html,
 body {
     @include no-padd-marg;

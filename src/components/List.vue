@@ -6,7 +6,7 @@
 		</div>
 		<SortPane :shouldDisplay="data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" />
 		<ul v-if="data.length" class="view-list">
-			<li v-for="word in sortedData" :key="word._id" class="view-list__item">
+			<li v-for="word in sortedData" :key="word._id">
 				<Word :resource="word" />
 			</li>
 		</ul>
@@ -93,11 +93,6 @@ export default {
 
 .view-list {
 	padding: 1rem;
-	&__item {
-		@include light-border;
-		min-height: 5rem;
-		margin-bottom: 1rem;
-	}
 }
 
 .no-results {

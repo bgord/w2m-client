@@ -29,6 +29,7 @@ const server_port = 8787;
 				.find({
 					archived: false,
 				})
+				.sort({ inserted_ts: -1 })
 				.limit(20)
 				.toArray();
 			return res.status(200).send(activeWords);
