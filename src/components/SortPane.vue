@@ -1,7 +1,7 @@
 <template>
 	<div v-if="shouldDisplay" class="sort-pane">
 		<span class="sort-pane__sortby">SORT BY:</span>
-		<select class="sort-pane__select" v-model="sortByHash" @input="updateSortHashValue">
+		<select class="sort-pane__select" v-bind:value="sortHashValue" @change="updateSortHashValue">
 			<option selected value="default">-- --</option>
 			<option value="a-asc">A - Z</option>
 			<option value="a-desc">Z - A</option>
@@ -14,12 +14,7 @@
 <script>
 export default {
 	name: "SortPane",
-	data: function() {
-		return {
-			sortByHash: "default",
-		};
-	},
-	props: ["shouldDisplay", "updateSortHashValue"],
+	props: ["shouldDisplay", "sortHashValue", "updateSortHashValue"],
 };
 </script>
 

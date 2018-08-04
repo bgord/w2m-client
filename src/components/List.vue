@@ -4,7 +4,7 @@
 			<header class="view-header">Words ready for Memrise</header>
 			<button class="view-header__cta">PREPARE</button>
 		</div>
-		<SortPane :shouldDisplay="data.length" :updateSortHashValue="updateSortHashValue" />
+		<SortPane :shouldDisplay="data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" />
 		<ul v-if="data.length" class="view-list">
 			<li v-for="word in sortedData" :key="word._id" class="view-list__item">
 				<Word :resource="word" />
