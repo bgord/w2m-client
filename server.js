@@ -24,7 +24,13 @@ const server_port = 8787;
 
     app.use(cors());
     app.get("/words", async (req, res) => {
-      return res.status(200).send({ response: "words" });
+      const activeWords = await db
+        .collection("words")
+        .find({
+          archived: false,
+        })
+        .toArray();
+      return res.status(200).send({ response: activeWords });
     });
 
     app.listen(server_port, () =>

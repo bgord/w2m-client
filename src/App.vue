@@ -2,7 +2,7 @@
 	<div class="wrapper">
   		<Nav />
 		<Spinner :loading="loading" />
-		<List :loading="loading" :data="data"/>
+		<List :loading="loading" :data="data.response"/>
 	</div>
 </template>
 
