@@ -2,7 +2,9 @@
 	<div class="word-container">
 		<div class="word__upper">
 			<div class="word" v-html="highlightWordInContext" />
-			<button class="word__expand">EXPAND</button>
+			<button @click="toggleCollapse" class="word__expand">
+				{{hideExpandText}}
+			</button>
 		</div>
 		<div class="word__lower">
 			<div :class="{word__badge:true, blurred: !resource.downloadResult}">{{ MP3Msg }}</div>
@@ -18,8 +20,14 @@ export default {
 		return { collapsed: true };
 	},
 	props: ["resource"],
+	methods: {
+		toggleCollapse() {
+			console.log("COM");
+			this.collapsed = !this.collapsed;
+		},
+	},
 	computed: {
-		highlightWordInContext: function() {
+		highlightWordInContext() {
 			const { word, context } = this.resource;
 			let ret = context ? context : word;
 			return ret.replace(
@@ -27,7 +35,7 @@ export default {
 				`<span class="word--hightlighted">${word}</span>`
 			);
 		},
-		MP3Msg: function() {
+		MP3Msg() {
 			return this.resource.downloadResult ? "MP3" : "NO MP3";
 		},
 		suggestionsMsg: function() {
@@ -39,6 +47,9 @@ export default {
 				return "SUGGESTED TRANSLATION";
 			}
 			return "SUGGESTED TRANSLATIONS";
+		},
+		hideExpandText() {
+			return this.collapsed ? "EXPAND" : "HIDE";
 		},
 	},
 };
@@ -76,7 +87,6 @@ export default {
 		font-size: 12px;
 	}
 	&--hightlighted {
-		padding: 0 0 0 0.25rem;
 		background: $background;
 	}
 	&__expand {
