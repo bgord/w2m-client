@@ -1,19 +1,19 @@
 <template>
-    <div v-if="!loading" class="app-container">
-        <div class="space-between view-header__container">
+	<div v-if="!loading" class="app-container">
+		<div class="space-between view-header__container">
 			<header class="view-header">Words ready for Memrise</header>
 			<button class="view-header__cta">PREPARE</button>
 		</div>
-		<SortPane :data="data"/>
-        <ul v-if="data.length" class="view-list">
-            <li v-for="word in data" :key="word._id" class="view-list__item">
-                <!-- <Word :word="word"/> -->
-            </li>   
-        </ul>
-        <div v-else class="no-results">
-            No active words...
-        </div>
-    </div>
+		<SortPane :shouldDisplay="data.length" :updateSortHashValue="updateSortHashValue" />
+		<ul v-if="data.length" class="view-list">
+			<li v-for="word in sortedData" :key="word._id" class="view-list__item">
+				<Word :resource="word" />
+			</li>
+		</ul>
+		<div v-else class="no-results">
+			No active words...
+		</div>
+	</div>
 
 </template>
 
@@ -24,6 +24,40 @@ import SortPane from "./SortPane";
 export default {
 	name: "List",
 	props: ["loading", "data"],
+	data() {
+		return {
+			sortHashValue: "default",
+			sorter: () => {},
+		};
+	},
+	methods: {
+		updateSortHashValue: function(e) {
+			this.sortHashValue = e.target.value;
+		},
+	},
+	computed: {
+		sortedData() {
+			const sorters = {
+				default: (a, b) =>
+					a.context.length < b.context.length ? 1 : -1,
+				"a-asc": (a, b) =>
+					a.word.toLowerCase() > b.word.toLowerCase() ? 1 : -1,
+				"a-desc": (a, b) =>
+					a.word.toLowerCase() < b.word.toLowerCase() ? 1 : -1,
+				"t-min": (a, b) =>
+					a.suggested_translations.length >
+					b.suggested_translations.length
+						? 1
+						: -1,
+				"t-max": (a, b) =>
+					a.suggested_translations.length >
+					b.suggested_translations.length
+						? 1
+						: -1,
+			};
+			return this.data.sort(sorters[this.sortHashValue]);
+		},
+	},
 	components: { Word, SortPane },
 };
 </script>

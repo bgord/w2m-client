@@ -1,8 +1,8 @@
 <template>
 	<div class="wrapper">
-  		<Nav />
+		<Nav />
 		<Spinner :loading="loading" />
-		<List :loading="loading" :data="data.response"/>
+		<List :loading="loading" :data="data" />
 	</div>
 </template>
 

@@ -1,23 +1,25 @@
 <template>
-	<div v-if="data.length" class="sort-pane">
+	<div v-if="shouldDisplay" class="sort-pane">
 		<span class="sort-pane__sortby">SORT BY:</span>
-		<select class="sort-pane__select">
-			<option>-- --</option>
-			<option>A - Z</option>
-			<option>Z - A</option>
-			<option>Min translations</option>
-			<option>Max translations</option>
+		<select class="sort-pane__select" v-model="sortByHash" @input="updateSortHashValue">
+			<option selected value="default">-- --</option>
+			<option value="a-asc">A - Z</option>
+			<option value="a-desc">Z - A</option>
+			<option value="t-min">Min translations</option>
+			<option value="t-max">Max translations</option>
 		</select>
-		<label class="sort-pane__label">
-			<input type="checkbox" class="sort-pane__checkbox" /> with context first
-		</label>
 	</div>
 </template>
 
 <script>
 export default {
 	name: "SortPane",
-	props: ["data"],
+	data: function() {
+		return {
+			sortByHash: "default",
+		};
+	},
+	props: ["shouldDisplay", "updateSortHashValue"],
 };
 </script>
 
@@ -34,14 +36,7 @@ export default {
 		@include label-text;
 	}
 	&__select {
-	}
-	&__label {
-		@include label-text;
-		display: flex;
-		align-items: center;
-		margin-left: 1rem;
-	}
-	&__checkbox {
+		margin-left: 0.5rem;
 	}
 }
 </style>

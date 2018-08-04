@@ -31,7 +31,7 @@ const server_port = 8787;
 				})
 				.limit(20)
 				.toArray();
-			return res.status(200).send({ response: activeWords });
+			return res.status(200).send(activeWords);
 		});
 
 		app.listen(server_port, () =>

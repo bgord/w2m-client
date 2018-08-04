@@ -1,13 +1,13 @@
 <template>
     <div>
-        Word:
+        {{ resource.word }}
     </div>
 </template>
 
 <script>
 export default {
 	name: "Word",
-	props: ["word"],
+	props: ["resource"],
 };
 </script>
 
