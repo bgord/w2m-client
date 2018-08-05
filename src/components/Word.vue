@@ -1,7 +1,10 @@
 <template>
-	<div class="word-container">
+	<div :class="{'word-container': true, uncollapsed: !collapsed}">
 		<div class="word__upper">
-			<span class="word" v-html="highlightWordInContext" />
+			<div :style="{'display':'flex', 'align-items': 'center'}">
+				<span class="word" v-html="highlightWordInContext" />
+				<span class="trans">{{ resource.translation | withParenthesis }}</span>
+			</div>
 			<button @click="toggleCollapse" class="word__expand">
 				{{hideExpandText}}
 			</button>
@@ -10,15 +13,18 @@
 			<div>
 				<form @submit.prevent="editContext">
 					<input v-model="context" class="input" autofocus />
-					<button class="btnek" type="submit">EDIT CONTEXT</button>
+					<button class="btnek" type="submit">SAVE CONTEXT</button>
 				</form>
 			</div>
 			<form @submit.prevent="editTranslation">
 				<input v-model="newTranslation" class="input" />
-				<button class="btnek" type="submit">EDIT TRANSLATION</button>
+				<button class="btnek" type="submit">SAVE TRANSLATION</button>
 			</form>
-			<ul v-if="resource.suggestedTranslations.length">
-				<li v-for="(translation, index) in resource.suggestedTranslations" :key="index" @click="newTranslation = translation">
+			<div v-if="resource.suggestedTranslations.length" class="sugg-trans__text">
+				Suggested translations:
+			</div>
+			<ul v-if="resource.suggestedTranslations.length" class="sugg-trans__list">
+				<li v-for="(translation, index) in resource.suggestedTranslations" :key="index" @click="newTranslation = translation" class="sugg-trans__item">
 					{{ translation }}
 				</li>
 			</ul>
@@ -113,6 +119,14 @@ export default {
 			return this.collapsed ? "EXPAND" : "HIDE";
 		},
 	},
+	filters: {
+		withParenthesis: function(translation) {
+			if (translation) {
+				return `(${translation})`;
+			}
+			return "";
+		},
+	},
 };
 </script>
 
@@ -121,6 +135,7 @@ export default {
 .word-container {
 	background: #fafafa;
 	border-left: 3px solid $background;
+	border-right: 3px solid $background;
 	font-weight: 600;
 	font-size: 14px;
 	min-height: 3.5rem;
@@ -131,8 +146,10 @@ export default {
 	display: inline-block;
 	padding-top: 3px;
 	padding-left: 1rem;
+	padding-right: 0.5rem;
 	&__upper {
 		@include space-between;
+		align-items: baseline;
 	}
 	&__lower {
 		margin-left: 1rem;
@@ -173,6 +190,10 @@ export default {
 	padding-left: 0.25rem;
 }
 
+.input::before {
+	content: "·";
+}
+
 .btnek {
 	@include btn-cta($bc: #4286f4, $fc: $almost-white);
 	margin-left: 0;
@@ -180,5 +201,35 @@ export default {
 	border-radius: 3px;
 	font-size: 12px;
 	font-weight: 600;
+}
+
+.sugg-trans__list {
+	margin-top: 5px;
+	padding-left: 1rem;
+	margin-bottom: 1rem;
+}
+
+.sugg-trans__item {
+	font-style: italic;
+	cursor: pointer;
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.uncollapsed {
+	@include light-shadow;
+}
+
+.sugg-trans__text {
+	@include descriptive-text;
+	padding-top: 5px;
+	padding-left: 1rem;
+}
+
+.trans {
+	padding-top: 2px;
+	color: #888;
+	font-size: 12px;
 }
 </style>

@@ -65,7 +65,7 @@ export default {
 	@include light-border;
 	@include shadow;
 	margin: 2rem auto;
-	max-width: 40rem;
+	max-width: 45rem;
 	width: 100%;
 	min-height: 6rem;
 	background: $almost-white;

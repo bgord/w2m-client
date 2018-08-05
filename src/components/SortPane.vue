@@ -39,7 +39,7 @@ export default {
 	}
 }
 .cta {
-	@include btn-cta($bc: #a8ff8f, $fc: #666);
+	@include btn-cta($bc: #a8ff8f, $fc: #58aa40);
 	height: 1.75rem;
 	border-radius: 3px;
 	font-size: 12px;
