@@ -171,7 +171,6 @@ export default {
 			this.shouldFocusTrans = true;
 			return;
 		}
-		this.$refs.translation.focus();
 	},
 };
 </script>
