@@ -140,7 +140,7 @@ export default {
 			this.$refs.context.focus();
 		},
 		chooseSugestion(suggestion) {
-			this.translation = suggestion;
+			this.translation += suggestion;
 			this.$refs.translation.focus();
 		},
 	},
