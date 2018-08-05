@@ -58,6 +58,11 @@ $almost-white: #fcfefb;
     justify-content: space-between;
 }
 
+.space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
 @mixin left() {
     display: flex;
     justify-content: flex-start;

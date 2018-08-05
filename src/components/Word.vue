@@ -30,8 +30,11 @@
 			</ul>
 		</div>
 		<div class=" word__lower ">
-			<div :class="{word__badge:true, blurred: !resource.downloadResult} ">{{ MP3Msg }}</div>
-			<div :class="{word__badge:true, blurred: !resource.suggestedTranslations.length} ">{{suggestionsMsg}}</div>
+			<div>
+				<div :class="{word__badge:true, blurred: !resource.downloadResult} ">{{ MP3Msg }}</div>
+				<div :class="{word__badge:true, blurred: !resource.suggestedTranslations.length} ">{{suggestionsMsg}}</div>
+			</div>
+			<button v-if="!collapsed" class="delete">DELETE</button>
 		</div>
 	</div>
 </template>
@@ -155,7 +158,7 @@ export default {
 		margin-left: 1rem;
 		margin-top: 0.5rem;
 		height: 1rem;
-		@include left;
+		@include space-between;
 	}
 	&__badge {
 		display: inline-block;
@@ -184,14 +187,11 @@ export default {
 
 .input {
 	margin: 1rem 1rem 0 1rem;
-	height: 2rem;
+	height: 1.75rem;
 	border: 1px solid #eee;
 	width: 20rem;
-	padding-left: 0.25rem;
-}
-
-.input::before {
-	content: "·";
+	padding-left: 0.5rem;
+	border-radius: 4px;
 }
 
 .btnek {
@@ -204,7 +204,7 @@ export default {
 }
 
 .sugg-trans__list {
-	margin-top: 5px;
+	margin-top: 6px;
 	padding-left: 1rem;
 	margin-bottom: 1rem;
 }
@@ -223,7 +223,8 @@ export default {
 
 .sugg-trans__text {
 	@include descriptive-text;
-	padding-top: 5px;
+	font-size: 12px;
+	padding-top: 16px;
 	padding-left: 1rem;
 }
 
@@ -231,5 +232,15 @@ export default {
 	padding-top: 2px;
 	color: #888;
 	font-size: 12px;
+}
+
+.delete {
+	@include btn-reset;
+	height: 1rem;
+	margin-top: 1px;
+	margin-right: 1rem;
+	font-weight: 600;
+	color: #e54053;
+	letter-spacing: 1px;
 }
 </style>
