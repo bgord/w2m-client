@@ -24,8 +24,8 @@
 				Suggested translations:
 			</div>
 			<ul v-if="resource.suggestedTranslations.length" class="sugg-trans__list">
-				<li v-for="(translation, index) in resource.suggestedTranslations" :key="index" @click="translation = translation" class="sugg-trans__item">
-					{{ translation }}
+				<li v-for="(suggestion, index) in resource.suggestedTranslations" :key="index" @click="translation = suggestion" class="sugg-trans__item">
+					{{ suggestion }}
 				</li>
 			</ul>
 		</div>
