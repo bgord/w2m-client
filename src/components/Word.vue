@@ -12,12 +12,12 @@
 		<div v-if="!collapsed" class="word__middle">
 			<div>
 				<form @submit.prevent="editContext">
-					<input v-model="context" class="input" autofocus />
+					<input v-model="context" class="input" ref="context" />
 					<button :disabled="editContextPending" :class="{'btnek':true,'btnek--loading': editContextPending}" type="submit">SAVE CONTEXT</button>
 				</form>
 			</div>
 			<form @submit.prevent="editTranslation">
-				<input v-model="newTranslation" class="input" />
+				<input v-model="newTranslation" class="input" ref="translation" />
 				<button :disabled="editTranslationPending" :class="{'btnek':true,'btnek--loading': editTranslationPending}" type="submit">SAVE TRANSLATION</button>
 			</form>
 			<div v-if="resource.suggestedTranslations.length" class="sugg-trans__text">
@@ -46,6 +46,7 @@ export default {
 	name: "Word",
 	data() {
 		return {
+			shouldFocusTrans: false,
 			editContextPending: false,
 			editTranslationPending: false,
 			collapsed: true,
@@ -57,12 +58,17 @@ export default {
 	props: ["resource", "refresh"],
 	methods: {
 		toggleCollapse() {
+			if (!this.collapsed) {
+				this.shouldFocusTrans = false;
+			}
 			this.collapsed = !this.collapsed;
 		},
 		async editContext() {
 			if (this.editContextPending) {
 				return;
 			}
+			this.shouldFocusTrans = false;
+			this.$refs.context.focus();
 			if (this.resource.context === this.context) {
 				alert("Context hasn't changed.");
 				return;
@@ -87,6 +93,7 @@ export default {
 			if (this.editTranslationPending) {
 				return;
 			}
+			this.$refs.translation.focus();
 			if (this.resource.translation === this.newTranslation) {
 				alert("Translation hasn't changed.");
 				return;
@@ -152,6 +159,14 @@ export default {
 			}
 			return "";
 		},
+	},
+	updated() {
+		if (!this.collapsed && !this.shouldFocusTrans) {
+			this.$refs.context.focus();
+			this.shouldFocusTrans = true;
+			return;
+		}
+		this.$refs.translation.focus();
 	},
 };
 </script>
@@ -226,10 +241,16 @@ export default {
 	font-weight: 600;
 	&--loading {
 		opacity: 0.5;
-		@include shadow;
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
 		&:hover {
 			cursor: auto;
 		}
+	}
+	&:focus {
+		@include shadow;
+	}
+	&:hover {
+		opacity: 0.9;
 	}
 }
 
