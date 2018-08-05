@@ -116,10 +116,15 @@ export default {
 		},
 		async deleteWord() {
 			try {
-				await axios.delete(
-					"http://localhost:8686/words/" + this.resource._id
+				const result = window.confirm(
+					`Delete word "${this.resource.word}"?`
 				);
-				await this.refresh();
+				if (result) {
+					await axios.delete(
+						"http://localhost:8686/words/" + this.resource._id
+					);
+					await this.refresh();
+				}
 			} catch (e) {
 				console.error(e);
 				alert("Error while updating word...");
