@@ -1,7 +1,7 @@
 <template>
 	<div v-if="!loading" class="app-container">
 
-		<SortPane :shouldDisplay="data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" />
+		<SortPane :shouldDisplay="data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" />
 		<ul v-if="data.length" class="view-list">
 			<li v-for="word in sortedData" :key="word._id">
 				<Word :resource="word" :refresh="refresh" />
@@ -24,12 +24,16 @@ export default {
 	data() {
 		return {
 			sortHashValue: "default",
+			noTranslationOnlyValue: true,
 			sorter: () => {},
 		};
 	},
 	methods: {
 		updateSortHashValue: function(e) {
 			this.sortHashValue = e.target.value;
+		},
+		updateNoTranslationOnly: function(e) {
+			this.noTranslationOnlyValue = e.target.checked;
 		},
 	},
 	computed: {
@@ -52,7 +56,10 @@ export default {
 						? 1
 						: -1,
 			};
-			return this.data.sort(sorters[this.sortHashValue]);
+			const filter = this.noTranslationOnlyValue
+				? e => !e.translation
+				: () => true;
+			return this.data.filter(filter).sort(sorters[this.sortHashValue]);
 		},
 	},
 	components: { Word, SortPane },
