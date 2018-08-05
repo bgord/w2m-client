@@ -168,10 +168,6 @@ export default {
 			return this.resource.context !== this.context;
 		},
 		hasTranslationChanged() {
-			console.log({
-				resource: this.resource.translation,
-				this: this.translation,
-			});
 			return (this.resource.translation || "") !== this.translation;
 		},
 	},
