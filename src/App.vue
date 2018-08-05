@@ -1,9 +1,9 @@
 <template>
 	<div class="wrapper">
 		<Nav />
-		<PrepareWords v-if="showPrepareWordsModal" />
-		<Spinner :loading="loading" />
-		<List :loading="loading" :data="data" :refresh="fetchWords" :showModal="showModal" />
+		<PrepareWords v-if="showPrepareWordsModal" :closeModal="closeModal" :data="data" />
+		<Spinner :loading=" loading " />
+		<List :loading="loading " :data="data " :refresh="fetchWords " :showModal="showModal " />
 	</div>
 </template>
 
@@ -39,6 +39,9 @@ export default {
 		},
 		showModal() {
 			this.showPrepareWordsModal = true;
+		},
+		closeModal() {
+			this.showPrepareWordsModal = false;
 		},
 	},
 	async created() {
