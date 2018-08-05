@@ -137,6 +137,7 @@ export default {
 		resetWord() {
 			this.translation = this.resource.translation || "";
 			this.context = this.resource.context;
+			this.$refs.context.focus();
 		},
 		chooseSugestion(suggestion) {
 			this.translation = suggestion;
