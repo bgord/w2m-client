@@ -263,6 +263,7 @@ export default {
 	margin-top: 6px;
 	padding-left: 1rem;
 	margin-bottom: 1rem;
+	font-size: 13px;
 	display: inline-block;
 }
 
