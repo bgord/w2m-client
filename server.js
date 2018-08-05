@@ -34,7 +34,7 @@ const sleep = ms =>
 				.find({
 					archived: false,
 				})
-				.sort({ word: -1 })
+				.sort({ inserted_ts: 1 })
 				.limit(20)
 				.toArray();
 			await sleep(300);
