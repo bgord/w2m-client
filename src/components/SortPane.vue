@@ -43,10 +43,15 @@ export default {
 .sort-pane {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	position: sticky;
+	top: 0;
+	left: 0;
 	padding-left: 1.125rem;
 	height: 3rem;
-	align-items: center;
+	background: $almost-white;
 	border-bottom: 1px solid #eee;
+	z-index: 3;
 	&__content {
 		display: flex;
 	}
