@@ -13,6 +13,11 @@ const db_name = "w2m";
 
 const server_port = 8686;
 
+const sleep = ms =>
+	new Promise(resolve => {
+		setTimeout(() => resolve(), ms);
+	});
+
 (async () => {
 	try {
 		const client = await MongoClient.connect(
@@ -32,6 +37,7 @@ const server_port = 8686;
 				.sort({ word: -1 })
 				.limit(20)
 				.toArray();
+			await sleep(300);
 			return res.status(200).send(activeWords);
 		});
 
@@ -42,6 +48,7 @@ const server_port = 8686;
 				const resource = await db
 					.collection("words")
 					.update({ _id: ObjectId(id) }, { $set: { ...newBody } });
+				await sleep(300);
 				return res.status(200).send(newBody);
 			} catch (e) {
 				console.error(e);
@@ -55,6 +62,7 @@ const server_port = 8686;
 				const resource = await db
 					.collection("words")
 					.remove({ _id: ObjectId(id) });
+				await sleep(300);
 				return res.status(200).send("deleted");
 			} catch (e) {
 				console.error(e);

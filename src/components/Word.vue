@@ -3,7 +3,7 @@
 		<div class="word__upper">
 			<div :style="{'display':'flex', 'align-items': 'center'}">
 				<span class="word" v-html="highlightWordInContext" />
-				<span class="trans">{{ resource.translation | withParenthesis }}</span>
+				<span class="trans">{{ newTranslation | withParenthesis }}</span>
 			</div>
 			<button @click="toggleCollapse" class="word__expand">
 				{{hideExpandText}}
@@ -13,12 +13,12 @@
 			<div>
 				<form @submit.prevent="editContext">
 					<input v-model="context" class="input" autofocus />
-					<button class="btnek" type="submit">SAVE CONTEXT</button>
+					<button :disabled="editContextPending" :class="{'btnek':true,'btnek--loading': editContextPending}" type="submit">SAVE CONTEXT</button>
 				</form>
 			</div>
 			<form @submit.prevent="editTranslation">
 				<input v-model="newTranslation" class="input" />
-				<button class="btnek" type="submit">SAVE TRANSLATION</button>
+				<button :disabled="editTranslationPending" :class="{'btnek':true,'btnek--loading': editTranslationPending}" type="submit">SAVE TRANSLATION</button>
 			</form>
 			<div v-if="resource.suggestedTranslations.length" class="sugg-trans__text">
 				Suggested translations:
@@ -46,6 +46,8 @@ export default {
 	name: "Word",
 	data() {
 		return {
+			editContextPending: false,
+			editTranslationPending: false,
 			collapsed: true,
 			context: this.resource.context,
 			newTranslation: this.resource.translation || "",
@@ -58,41 +60,51 @@ export default {
 			this.collapsed = !this.collapsed;
 		},
 		async editContext() {
+			if (this.editContextPending) {
+				return;
+			}
 			if (this.resource.context === this.context) {
 				alert("Context hasn't changed.");
 				return;
 			}
 			try {
+				this.editContextPending = true;
 				await axios.patch(
 					"http://localhost:8686/words/" + this.resource._id,
 					{
 						context: this.context,
 					}
 				);
-				alert("Updated!");
 				await this.refresh();
 			} catch (e) {
 				console.error(e);
 				alert("Error while updating word...");
+			} finally {
+				this.editContextPending = false;
 			}
 		},
 		async editTranslation() {
+			if (this.editTranslationPending) {
+				return;
+			}
 			if (this.resource.translation === this.newTranslation) {
 				alert("Translation hasn't changed.");
 				return;
 			}
 			try {
+				this.editTranslationPending = true;
 				await axios.patch(
 					"http://localhost:8686/words/" + this.resource._id,
 					{
 						translation: this.newTranslation,
 					}
 				);
-				alert("Updated!");
 				await this.refresh();
 			} catch (e) {
 				console.error(e);
 				alert("Error while updating word...");
+			} finally {
+				this.editTranslationPending = false;
 			}
 		},
 		async deleteWord() {
@@ -100,7 +112,6 @@ export default {
 				await axios.delete(
 					"http://localhost:8686/words/" + this.resource._id
 				);
-				alert("Deleted");
 				await this.refresh();
 			} catch (e) {
 				console.error(e);
@@ -123,7 +134,7 @@ export default {
 		suggestionsMsg: function() {
 			const arr = this.resource.suggestedTranslations;
 			if (!arr.length) {
-				return "NO TRANSLATIONS";
+				return "NO SUGGESTED TRANSLATIONS";
 			}
 			if (arr.length === 1) {
 				return "SUGGESTED TRANSLATION";
@@ -213,6 +224,13 @@ export default {
 	border-radius: 3px;
 	font-size: 12px;
 	font-weight: 600;
+	&--loading {
+		opacity: 0.5;
+		@include shadow;
+		&:hover {
+			cursor: auto;
+		}
+	}
 }
 
 .sugg-trans__list {
@@ -222,10 +240,11 @@ export default {
 }
 
 .sugg-trans__item {
+	color: #444;
 	font-style: italic;
 	cursor: pointer;
 	&:hover {
-		opacity: 0.8;
+		opacity: 0.9;
 	}
 }
 
