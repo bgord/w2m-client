@@ -20,7 +20,7 @@
 			</div>
 		</div>
 
-		<button class="sort-pane__cta">PREPARE</button>
+		<button class="sort-pane__cta" @click="showModal">PREPARE</button>
 	</div>
 </template>
 
@@ -33,6 +33,7 @@ export default {
 		"updateSortHashValue",
 		"updateNoTranslationOnly",
 		"noTranslationOnlyValue",
+		"showModal",
 	],
 };
 </script>

@@ -1,8 +1,9 @@
 <template>
 	<div class="wrapper">
 		<Nav />
+		<PrepareWords v-if="showPrepareWordsModal" />
 		<Spinner :loading="loading" />
-		<List :loading="loading" :data="data" :refresh="fetchWords" />
+		<List :loading="loading" :data="data" :refresh="fetchWords" :showModal="showModal" />
 	</div>
 </template>
 
@@ -10,6 +11,7 @@
 import Nav from "./components/Nav";
 import Spinner from "./components/Spinner";
 import List from "./components/List";
+import PrepareWords from "./components/PrepareWords";
 import axios from "axios";
 
 export default {
@@ -20,7 +22,7 @@ export default {
 			data: null,
 			error: false,
 			errorMsg: "",
-			header: "Words",
+			showPrepareWordsModal: false,
 		};
 	},
 	methods: {
@@ -35,10 +37,13 @@ export default {
 				this.loading = false;
 			}
 		},
+		showModal() {
+			this.showPrepareWordsModal = true;
+		},
 	},
 	async created() {
 		await this.fetchWords();
 	},
-	components: { Nav, Spinner, List },
+	components: { Nav, Spinner, List, PrepareWords },
 };
 </script>

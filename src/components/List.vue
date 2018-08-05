@@ -1,7 +1,7 @@
 <template>
 	<div v-if="!loading" class="app-container">
 
-		<SortPane :shouldDisplay="data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" />
+		<SortPane :shouldDisplay="data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal"/>
 		<ul v-if="data.length" class="view-list">
 			<li v-for="word in sortedData" :key="word._id">
 				<Word :resource="word" :refresh="refresh" />
@@ -20,7 +20,7 @@ import SortPane from "./SortPane";
 
 export default {
 	name: "List",
-	props: ["loading", "data", "refresh"],
+	props: ["loading", "data", "refresh", "showModal"],
 	data() {
 		return {
 			sortHashValue: "default",
