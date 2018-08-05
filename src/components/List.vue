@@ -7,7 +7,7 @@
 		<SortPane :shouldDisplay="data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" />
 		<ul v-if="data.length" class="view-list">
 			<li v-for="word in sortedData" :key="word._id">
-				<Word :resource="word" />
+				<Word :resource="word" :refresh="refresh" />
 			</li>
 		</ul>
 		<div v-else class="no-results">
@@ -23,7 +23,7 @@ import SortPane from "./SortPane";
 
 export default {
 	name: "List",
-	props: ["loading", "data"],
+	props: ["loading", "data", "refresh"],
 	data() {
 		return {
 			sortHashValue: "default",

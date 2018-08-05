@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const express = require("express");
 const bodyParser = require("body-parser");
 const assert = require("assert");
@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 const uri = "mongodb://localhost:27000";
 const db_name = "w2m";
 
-const server_port = 8787;
+const server_port = 8686;
 
 (async () => {
 	try {
@@ -29,10 +29,23 @@ const server_port = 8787;
 				.find({
 					archived: false,
 				})
-				.sort({ inserted_ts: -1 })
 				.limit(20)
 				.toArray();
 			return res.status(200).send(activeWords);
+		});
+
+		app.patch("/words/:id", async (req, res) => {
+			const { id } = req.params;
+			const newBody = req.body;
+			try {
+				const resource = await db
+					.collection("words")
+					.update({ _id: ObjectId(id) }, { $set: { ...newBody } });
+				return res.status(200).send(newBody);
+			} catch (e) {
+				console.error(e);
+				return res.status(400).send({ error: e.message });
+			}
 		});
 
 		app.listen(server_port, () =>

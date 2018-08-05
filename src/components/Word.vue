@@ -6,29 +6,90 @@
 				{{hideExpandText}}
 			</button>
 		</div>
-		<div class="word__lower">
-			<div :class="{word__badge:true, blurred: !resource.downloadResult}">{{ MP3Msg }}</div>
-			<div :class="{word__badge:true, blurred: !resource.suggestedTranslations.length}">{{suggestionsMsg}}</div>
+		<div v-if="!collapsed" class="word__middle">
+			<div>
+				<form @submit.prevent="editContext">
+					<input v-model="context" class="input" autofocus />
+					<button class="btnek" type="submit">EDIT CONTEXT</button>
+				</form>
+			</div>
+			<form @submit.prevent="editTranslation">
+				<input v-model="newTranslation" class="input" />
+				<button class="btnek" type="submit">EDIT TRANSLATION</button>
+			</form>
+			<ul v-if="resource.suggestedTranslations.length">
+				<li v-for="(translation, index) in resource.suggestedTranslations" :key="index" @click="newTranslation = translation">
+					{{ translation }}
+				</li>
+			</ul>
+		</div>
+		<div class=" word__lower ">
+			<div :class="{word__badge:true, blurred: !resource.downloadResult} ">{{ MP3Msg }}</div>
+			<div :class="{word__badge:true, blurred: !resource.suggestedTranslations.length} ">{{suggestionsMsg}}</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
 	name: "Word",
 	data() {
-		return { collapsed: true };
+		return {
+			collapsed: true,
+			context: this.resource.context,
+			newTranslation: this.resource.translation || "",
+			word: this.resource.word,
+		};
 	},
-	props: ["resource"],
+	props: ["resource", "refresh"],
 	methods: {
 		toggleCollapse() {
-			console.log("COM");
 			this.collapsed = !this.collapsed;
+		},
+		async editContext() {
+			if (this.resource.context === this.context) {
+				alert("Context hasn't changed.");
+				return;
+			}
+			try {
+				await axios.patch(
+					"http://localhost:8686/words/" + this.resource._id,
+					{
+						context: this.context,
+					}
+				);
+				alert("Updated!");
+				await this.refresh();
+			} catch (e) {
+				console.error(e);
+				alert("Error while updating word...");
+			}
+		},
+		async editTranslation() {
+			if (this.resource.translation === this.newTranslation) {
+				alert("Translation hasn't changed.");
+				return;
+			}
+			try {
+				await axios.patch(
+					"http://localhost:8686/words/" + this.resource._id,
+					{
+						translation: this.newTranslation,
+					}
+				);
+				alert("Updated!");
+				await this.refresh();
+			} catch (e) {
+				console.error(e);
+				alert("Error while updating word...");
+			}
 		},
 	},
 	computed: {
 		highlightWordInContext() {
-			const { word, context } = this.resource;
+			const { word, context } = this;
 			let ret = context ? context : word;
 			return ret.replace(
 				word,
@@ -63,6 +124,7 @@ export default {
 	font-weight: 600;
 	font-size: 14px;
 	min-height: 3.5rem;
+	padding-bottom: 0.5rem;
 	margin-bottom: 1.5rem;
 }
 .word {
@@ -101,5 +163,22 @@ export default {
 }
 .blurred {
 	opacity: 0.5;
+}
+
+.input {
+	margin: 1rem 1rem 0 1rem;
+	height: 2rem;
+	border: 1px solid #eee;
+	width: 20rem;
+	padding-left: 0.25rem;
+}
+
+.btnek {
+	@include btn-cta($bc: #4286f4, $fc: $almost-white);
+	margin-left: 0;
+	height: 1.5rem;
+	border-radius: 3px;
+	font-size: 12px;
+	font-weight: 600;
 }
 </style>

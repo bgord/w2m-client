@@ -2,7 +2,7 @@
 	<div class="wrapper">
 		<Nav />
 		<Spinner :loading="loading" />
-		<List :loading="loading" :data="data" />
+		<List :loading="loading" :data="data" :refresh="fetchWords" />
 	</div>
 </template>
 
@@ -23,16 +23,21 @@ export default {
 			header: "Words",
 		};
 	},
+	methods: {
+		async fetchWords() {
+			try {
+				const { data } = await axios.get("http://localhost:8686/words");
+				this.data = data;
+			} catch (e) {
+				this.error = false;
+				this.errorMsg = "Error while loading words...";
+			} finally {
+				this.loading = false;
+			}
+		},
+	},
 	async created() {
-		try {
-			const { data } = await axios.get("http://localhost:8787/words");
-			this.data = data;
-		} catch (e) {
-			this.error = false;
-			this.errorMsg = "Error while loading words...";
-		} finally {
-			this.loading = false;
-		}
+		await this.fetchWords();
 	},
 	components: { Nav, Spinner, List },
 };
