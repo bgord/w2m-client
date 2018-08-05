@@ -3,7 +3,7 @@
 		<div class="word__upper">
 			<div :style="{'display':'flex', 'align-items': 'center'}">
 				<span class="word" v-html="highlightWordInContext" />
-				<span class="trans">{{ newTranslation | withParenthesis }}</span>
+				<span class="trans">{{ translation | withParenthesis }}</span>
 			</div>
 			<button @click="toggleCollapse" class="word__expand">
 				{{hideExpandText}}
@@ -17,14 +17,14 @@
 				</form>
 			</div>
 			<form @submit.prevent="editTranslation">
-				<input v-model="newTranslation" class="input" ref="translation" />
+				<input v-model="translation" class="input" ref="translation" />
 				<button :disabled="editTranslationPending" :class="{'btnek':true,'btnek--loading': editTranslationPending}" type="submit">SAVE TRANSLATION</button>
 			</form>
 			<div v-if="resource.suggestedTranslations.length" class="sugg-trans__text">
 				Suggested translations:
 			</div>
 			<ul v-if="resource.suggestedTranslations.length" class="sugg-trans__list">
-				<li v-for="(translation, index) in resource.suggestedTranslations" :key="index" @click="newTranslation = translation" class="sugg-trans__item">
+				<li v-for="(translation, index) in resource.suggestedTranslations" :key="index" @click="translation = translation" class="sugg-trans__item">
 					{{ translation }}
 				</li>
 			</ul>
@@ -51,7 +51,7 @@ export default {
 			editTranslationPending: false,
 			collapsed: true,
 			context: this.resource.context,
-			newTranslation: this.resource.translation || "",
+			translation: this.resource.translation || "",
 			word: this.resource.word,
 		};
 	},
@@ -94,7 +94,7 @@ export default {
 				return;
 			}
 			this.$refs.translation.focus();
-			if (this.resource.translation === this.newTranslation) {
+			if (this.resource.translation === this.translation) {
 				alert("Translation hasn't changed.");
 				return;
 			}
@@ -103,7 +103,7 @@ export default {
 				await axios.patch(
 					"http://localhost:8686/words/" + this.resource._id,
 					{
-						translation: this.newTranslation,
+						translation: this.translation,
 					}
 				);
 				await this.refresh();
@@ -171,6 +171,7 @@ export default {
 			this.shouldFocusTrans = true;
 			return;
 		}
+		this.$refs.translation.focus();
 	},
 };
 </script>
