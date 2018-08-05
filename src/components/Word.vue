@@ -258,6 +258,7 @@ export default {
 	margin-top: 6px;
 	padding-left: 1rem;
 	margin-bottom: 1rem;
+	display: inline-block;
 }
 
 .sugg-trans__item {
@@ -265,7 +266,7 @@ export default {
 	font-style: italic;
 	cursor: pointer;
 	&:hover {
-		opacity: 0.9;
+		opacity: 0.85;
 	}
 }
 
