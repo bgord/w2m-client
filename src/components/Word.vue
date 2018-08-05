@@ -12,12 +12,12 @@
 		<div v-if="!collapsed" class="word__middle">
 			<div>
 				<form @submit.prevent="editContext">
-					<input v-model="context" class="input" ref="context" />
+					<input v-model="context" class="input" ref="context" @keyup.esc="context=''" />
 					<button :disabled="editContextPending" :class="{'btnek':true,'btnek--loading': editContextPending}" type="submit">SAVE CONTEXT</button>
 				</form>
 			</div>
 			<form @submit.prevent="editTranslation">
-				<input v-model="translation" class="input" ref="translation" />
+				<input v-model="translation" class="input" ref="translation" @keyup.esc="translation=''" />
 				<button :disabled="editTranslationPending" :class="{'btnek':true,'btnek--loading': editTranslationPending}" type="submit">SAVE TRANSLATION</button>
 			</form>
 			<div v-if="resource.suggestedTranslations.length" class="sugg-trans__text">
@@ -171,7 +171,6 @@ export default {
 			this.shouldFocusTrans = true;
 			return;
 		}
-		this.$refs.translation.focus();
 	},
 };
 </script>
