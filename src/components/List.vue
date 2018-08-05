@@ -1,9 +1,6 @@
 <template>
 	<div v-if="!loading" class="app-container">
-		<div class="space-between view-header__container">
-			<header class="view-header">Words ready for Memrise</header>
-			<button class="view-header__cta">PREPARE</button>
-		</div>
+
 		<SortPane :shouldDisplay="data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" />
 		<ul v-if="data.length" class="view-list">
 			<li v-for="word in sortedData" :key="word._id">
@@ -72,23 +69,6 @@ export default {
 	width: 100%;
 	min-height: 6rem;
 	background: $almost-white;
-}
-
-.view-header {
-	@include header-font;
-	height: calc(3rem - 1px);
-	padding: calc(0.75rem - 2px) 0 0 1rem;
-	&__container {
-		@include space-between;
-		align-items: center;
-		background: $background;
-	}
-	&__cta {
-		@include btn-cta($bc: $almost-white, $fc: #666);
-		&:hover {
-			border: 1px solid #eee;
-		}
-	}
 }
 
 .view-list {

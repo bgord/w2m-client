@@ -1,7 +1,7 @@
 <template>
 	<div class="word-container">
 		<div class="word__upper">
-			<div class="word" v-html="highlightWordInContext" />
+			<span class="word" v-html="highlightWordInContext" />
 			<button @click="toggleCollapse" class="word__expand">
 				{{hideExpandText}}
 			</button>

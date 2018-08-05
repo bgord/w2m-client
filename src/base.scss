@@ -44,7 +44,6 @@ $almost-white: #fcfefb;
 
 @mixin btn-cta($bc, $fc, $height: 2rem) {
     @include btn-reset;
-    @include light-shadow;
     font-size: 14px;
     margin: -2px 1rem 0 1rem;
     padding: 0 1rem;
