@@ -34,7 +34,11 @@
 				<div :class="{word__badge:true, blurred: !resource.downloadResult} ">{{ MP3Msg }}</div>
 				<div :class="{word__badge:true, blurred: !resource.suggestedTranslations.length} ">{{suggestionsMsg}}</div>
 			</div>
-			<button v-if="!collapsed" @click="deleteWord" class="delete">DELETE</button>
+			<div>
+				<button v-if="!collapsed" @click="resetWord" class="word__expand">RESET</button>
+				<button v-if="!collapsed" @click="deleteWord" class="delete">DELETE</button>
+
+			</div>
 		</div>
 	</div>
 </template>
@@ -130,6 +134,10 @@ export default {
 				alert("Error while updating word...");
 			}
 		},
+		resetWord() {
+			this.translation = this.resource.translation || "";
+			this.context = this.resource.context;
+		},
 	},
 	computed: {
 		highlightWordInContext() {
@@ -160,6 +168,10 @@ export default {
 			return this.resource.context !== this.context;
 		},
 		hasTranslationChanged() {
+			console.log({
+				resource: this.resource.translation,
+				this: this.translation,
+			});
 			return (this.resource.translation || "") !== this.translation;
 		},
 	},
@@ -206,6 +218,7 @@ export default {
 		margin-left: 1rem;
 		margin-top: 0.5rem;
 		height: 1rem;
+		margin-bottom: 0.5rem;
 		@include space-between;
 	}
 	&__badge {
