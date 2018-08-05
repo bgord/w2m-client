@@ -24,7 +24,7 @@ export default {
 	data() {
 		return {
 			sortHashValue: "default",
-			noTranslationOnlyValue: true,
+			noTranslationOnlyValue: false,
 			sorter: () => {},
 		};
 	},

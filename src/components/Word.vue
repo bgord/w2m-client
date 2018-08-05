@@ -12,12 +12,12 @@
 		<div v-if="!collapsed" class="word__middle">
 			<div>
 				<form @submit.prevent="editContext">
-					<input v-model="context" class="input" ref="context" @keyup.esc="context=''" />
+					<input v-model="context" :class="{'input':true,'input--changed':hasContextChanged}" ref="context" @keyup.esc="context=''" />
 					<button :disabled="editContextPending" :class="{'btnek':true,'btnek--loading': editContextPending}" type="submit">SAVE CONTEXT</button>
 				</form>
 			</div>
 			<form @submit.prevent="editTranslation">
-				<input v-model="translation" class="input" ref="translation" @keyup.esc="translation=''" />
+				<input v-model="translation" :class="{'input':true,'input--changed':hasTranslationChanged}" ref="translation" @keyup.esc="translation=''" />
 				<button :disabled="editTranslationPending" :class="{'btnek':true,'btnek--loading': editTranslationPending}" type="submit">SAVE TRANSLATION</button>
 			</form>
 			<div v-if="resource.suggestedTranslations.length" class="sugg-trans__text">
@@ -156,6 +156,12 @@ export default {
 		hideExpandText() {
 			return this.collapsed ? "EXPAND" : "HIDE";
 		},
+		hasContextChanged() {
+			return this.resource.context !== this.context;
+		},
+		hasTranslationChanged() {
+			return (this.resource.translation || "") !== this.translation;
+		},
 	},
 	filters: {
 		withParenthesis: function(translation) {
@@ -233,7 +239,11 @@ export default {
 	border: 1px solid #eee;
 	width: 20rem;
 	padding-left: 0.5rem;
-	border-radius: 4px;
+	border-radius: 2px;
+	border-left: 2px solid #eee;
+	&--changed {
+		border-left: 2px solid #4286f4;
+	}
 }
 
 .btnek {
