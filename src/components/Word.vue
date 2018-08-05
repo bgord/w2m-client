@@ -24,7 +24,7 @@
 				Suggested translations:
 			</div>
 			<ul v-if="resource.suggestedTranslations.length" class="sugg-trans__list">
-				<li v-for="(suggestion, index) in resource.suggestedTranslations" :key="index" @click="translation = suggestion" class="sugg-trans__item">
+				<li v-for="(suggestion, index) in resource.suggestedTranslations" :key="index" @click="chooseSugestion(suggestion)" class="sugg-trans__item">
 					{{ suggestion }}
 				</li>
 			</ul>
@@ -137,6 +137,10 @@ export default {
 		resetWord() {
 			this.translation = this.resource.translation || "";
 			this.context = this.resource.context;
+		},
+		chooseSugestion(suggestion) {
+			this.translation = suggestion;
+			this.$refs.translation.focus();
 		},
 	},
 	computed: {
