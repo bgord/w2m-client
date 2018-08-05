@@ -34,7 +34,7 @@
 				<div :class="{word__badge:true, blurred: !resource.downloadResult} ">{{ MP3Msg }}</div>
 				<div :class="{word__badge:true, blurred: !resource.suggestedTranslations.length} ">{{suggestionsMsg}}</div>
 			</div>
-			<button v-if="!collapsed" class="delete">DELETE</button>
+			<button v-if="!collapsed" @click="deleteWord" class="delete">DELETE</button>
 		</div>
 	</div>
 </template>
@@ -89,6 +89,18 @@ export default {
 					}
 				);
 				alert("Updated!");
+				await this.refresh();
+			} catch (e) {
+				console.error(e);
+				alert("Error while updating word...");
+			}
+		},
+		async deleteWord() {
+			try {
+				await axios.delete(
+					"http://localhost:8686/words/" + this.resource._id
+				);
+				alert("Deleted");
 				await this.refresh();
 			} catch (e) {
 				console.error(e);

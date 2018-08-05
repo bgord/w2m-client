@@ -49,6 +49,19 @@ const server_port = 8686;
 			}
 		});
 
+		app.delete("/words/:id", async (req, res) => {
+			const { id } = req.params;
+			try {
+				const resource = await db
+					.collection("words")
+					.remove({ _id: ObjectId(id) });
+				return res.status(200).send("deleted");
+			} catch (e) {
+				console.error(e);
+				return res.status(400).send({ error: e.message });
+			}
+		});
+
 		app.listen(server_port, () =>
 			console.log(`Listening on port ${server_port}`)
 		);
