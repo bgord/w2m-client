@@ -363,7 +363,7 @@ export default {
 	margin: 1px 1rem 0 0;
 	height: 1rem;
 	font-weight: 600;
-	color: #e54053;
+	color: $red;
 	letter-spacing: 1px;
 }
 
