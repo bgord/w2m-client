@@ -99,6 +99,13 @@ $green: #58aa40;
     }
 }
 
+@mixin btn-secondary($c) {
+    height: 1rem;
+    color: $c;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
 @mixin btn-cta-backup($bc, $fc, $height: 2rem) {
     @include btn-reset;
     font-size: 14px;

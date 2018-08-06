@@ -264,10 +264,7 @@ export default {
 		}
 		&__expand {
 			margin: 7px 1rem 0 0;
-			height: 1rem;
-			color: $blue;
-			letter-spacing: 1px;
-			font-weight: 600;
+			@include btn-secondary($c: $blue);
 		}
 		&__context {
 			display: inline-block;
@@ -335,18 +332,12 @@ export default {
 			margin-top: -5px;
 		}
 		&__reset {
+			@include btn-secondary($c: $blue);
 			margin: 7px 1rem 0 0;
-			height: 1rem;
-			color: $blue;
-			letter-spacing: 1px;
-			font-weight: 600;
 		}
 		&__delete {
+			@include btn-secondary($c: $red);
 			margin: 1px 1rem 0 0;
-			height: 1rem;
-			font-weight: 600;
-			color: $red;
-			letter-spacing: 1px;
 		}
 	}
 }

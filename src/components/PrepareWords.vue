@@ -125,12 +125,9 @@ export default {
 				margin: 0;
 			}
 			&__close {
+				@include btn-secondary($c: $blue);
 				display: block;
 				margin-right: 1rem;
-				height: 1rem;
-				font-weight: 600;
-				color: $blue;
-				letter-spacing: 1px;
 			}
 		}
 		&__code {
