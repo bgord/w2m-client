@@ -18,7 +18,7 @@
 import Word from "./Word";
 import SortPane from "./SortPane";
 import requiredify from "requiredify";
-console.log({ requiredify });
+
 export default {
 	name: "List",
 	props: requiredify(
