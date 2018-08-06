@@ -72,11 +72,11 @@ $green: #58aa40;
     border: none;
 }
 
-@mixin btn-cta($bc, $fc) {
+@mixin btn-cta($bc, $fc, $h:1.5rem) {
     @include btn-reset;
     margin: -2px 1rem 0 1rem;
     padding: 0 1rem;
-    height: 1.5rem;
+    height: $h;
     background: $bc;
     font-size: 12px;
     color: $fc;
@@ -104,17 +104,6 @@ $green: #58aa40;
     color: $c;
     letter-spacing: 1px;
     font-weight: 600;
-}
-
-@mixin btn-cta-backup($bc, $fc, $height: 2rem) {
-    @include btn-reset;
-    font-size: 14px;
-    margin: -2px 1rem 0 1rem;
-    padding: 0 1rem;
-    height: $height;
-    background: $bc;
-    color: $fc;
-    border: 1px solid transparent;
 }
 
 @mixin space-between($ai: stretch) {

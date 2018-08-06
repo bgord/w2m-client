@@ -90,14 +90,7 @@ export default {
 		margin-left: 1rem;
 	}
 	&__cta {
-		@include btn-cta-backup($bc: $green-bg, $fc: $green);
-		height: 1.75rem;
-		font-size: 12px;
-		font-weight: 600;
-		border-radius: 3px;
-		&:hover {
-			border: 1px solid #eee;
-		}
+		@include btn-cta($bc: $green-bg, $fc: $green, $h: 1.75rem);
 	}
 }
 </style>
