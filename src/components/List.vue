@@ -103,4 +103,3 @@ export default {
 	margin: calc(1rem - 2px) 1rem;
 }
 </style>
-
