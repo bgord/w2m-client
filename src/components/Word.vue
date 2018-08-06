@@ -280,8 +280,7 @@ export default {
 	}
 	&__expand {
 		@include btn-reset;
-		margin-top: 7px;
-		margin-right: 1rem;
+		margin: 7px 1rem 0 0;
 		height: 1rem;
 		color: #4286f4;
 		letter-spacing: 1px;
@@ -329,8 +328,7 @@ export default {
 
 .sugg-trans__list {
 	display: inline-block;
-	margin-top: 6px;
-	margin-bottom: 1rem;
+	margin: 6px auto 1rem auto;
 	padding-left: 1rem;
 }
 
@@ -350,8 +348,7 @@ export default {
 
 .sugg-trans__text {
 	@include descriptive-text;
-	padding-top: 1rem;
-	padding-left: 1rem;
+	padding: 1rem 0 0 1rem;
 	font-size: 12px;
 }
 

@@ -25,8 +25,7 @@ export default {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-top: -($side-length);
-	margin-left: -($side-length / 2);
+	margin: -($side-length) 0 0 (-($side-length / 2));
 	height: $side-length;
 	width: $side-length;
 	border-radius: 50%;

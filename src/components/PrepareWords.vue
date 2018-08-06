@@ -118,11 +118,11 @@ export default {
 
 .prepare-words {
 	@include shadow;
+	@include stretch-width($w: 50rem);
 	position: absolute;
 	left: calc(50% - 25rem);
 	margin-top: 1.5rem;
 	padding: 1rem;
-	width: 50rem;
 	background: $almost-white;
 	border: 4px solid $background;
 	z-index: 4;
