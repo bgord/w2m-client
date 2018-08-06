@@ -148,8 +148,8 @@ export default {
 		font-weight: 600;
 		border-radius: 3px;
 		&--loading {
+			@include strong-shadow;
 			opacity: 0.5;
-			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
 			&:hover {
 				cursor: auto;
 			}
