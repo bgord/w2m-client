@@ -295,22 +295,8 @@ export default {
 	&__submit {
 		@include btn-cta($bc: $blue, $fc: $almost-white);
 		margin-left: 0;
-		height: 1.5rem;
-		font-size: 12px;
-		font-weight: 600;
-		border-radius: 3px;
 		&--loading {
-			opacity: 0.5;
-			@include strong-shadow;
-			&:hover {
-				cursor: auto;
-			}
-		}
-		&:focus {
-			@include shadow;
-		}
-		&:hover {
-			opacity: 0.9;
+			@include bta-cta-loading;
 		}
 	}
 	&__sugg-trans {

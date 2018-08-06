@@ -143,19 +143,8 @@ export default {
 			&__button {
 				@include btn-cta($bc: $blue, $fc: $almost-white);
 				margin-right: 0;
-				height: 1.5rem;
-				font-size: 12px;
-				font-weight: 600;
-				border-radius: 3px;
 				&--loading {
-					@include strong-shadow;
-					opacity: 0.5;
-					&:hover {
-						cursor: auto;
-					}
-				}
-				&:focus {
-					@include shadow;
+					@include bta-cta-loading;
 				}
 			}
 		}

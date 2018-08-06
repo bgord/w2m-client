@@ -64,7 +64,6 @@ export default {
 
 <style lang="scss">
 @import "../base.scss";
-
 .sort-pane {
 	@include top-sticky;
 	@include b-light-border;
@@ -91,7 +90,7 @@ export default {
 		margin-left: 1rem;
 	}
 	&__cta {
-		@include btn-cta($bc: $green-bg, $fc: $green);
+		@include btn-cta-backup($bc: $green-bg, $fc: $green);
 		height: 1.75rem;
 		font-size: 12px;
 		font-weight: 600;
