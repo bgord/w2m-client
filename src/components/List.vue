@@ -23,15 +23,15 @@
 				    :resource="word"
 				    :refresh="refresh"
 				/>
-			</li>
-		</ul>
-		<div
-			v-else
-			class="no-results"
-		>
-			No active words...
-		</div>
-	</div>
+				</li>
+				</ul>
+				<div
+				    v-else
+				    class="no-results"
+				>
+					No active words...
+					</div>
+					</div>
 
 </template>
 
@@ -92,9 +92,8 @@ export default {
 .app-container {
 	@include full-light-border;
 	@include shadow;
+	@include stretch-width(45rem);
 	margin: 2rem auto;
-	max-width: 45rem;
-	width: 100%;
 	min-height: 6rem;
 	background: $almost-white;
 }

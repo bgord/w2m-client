@@ -92,6 +92,11 @@ $almost-white: #fcfefb;
     z-index: 3;
 }
 
+@mixin stretch-width($w: 10rem) {
+    max-width: $w;
+    width: 100%;
+}
+
 html,
 body {
     @include no-padd-marg;
