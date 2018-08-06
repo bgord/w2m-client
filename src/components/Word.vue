@@ -106,7 +106,16 @@ export default {
 			word: this.resource.word,
 		};
 	},
-	props: ["resource", "refresh"],
+	props: {
+		resource: {
+			type: Object,
+			required: true,
+		},
+		refresh: {
+			type: Function,
+			required: true,
+		},
+	},
 	methods: {
 		toggleCollapse() {
 			if (!this.collapsed) {

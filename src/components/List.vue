@@ -4,7 +4,7 @@
 	    class="app-container"
 	>
 		<SortPane
-		    :shouldDisplay="data.length"
+		    :shouldDisplay="!!data.length"
 		    :updateSortHashValue="updateSortHashValue"
 		    :sortHashValue="sortHashValue"
 		    :noTranslationOnlyValue="noTranslationOnlyValue"
@@ -39,7 +39,17 @@ import Word from "./Word";
 import SortPane from "./SortPane";
 export default {
 	name: "List",
-	props: ["loading", "data", "refresh", "showModal"],
+	props: {
+		loading: { type: Boolean, required: true },
+		data: {
+			type: Array,
+			default: function() {
+				return [];
+			},
+		},
+		refresh: { type: Function, required: true },
+		showModal: { type: Function, required: true },
+	},
 	data() {
 		return {
 			sortHashValue: "default",

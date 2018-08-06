@@ -8,7 +8,12 @@
 <script>
 export default {
 	name: "Spinner",
-	props: ["loading"],
+	props:{
+		loading: {
+			type: Boolean,
+			required: true,
+		},
+	},
 	computed: {
 		showSpinner: function() {
 			return { display: this.loading ? "block" : "none" };

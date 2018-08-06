@@ -37,7 +37,23 @@
 import axios from "axios";
 export default {
 	name: "PrepareWords",
-	props: ["data", "closeModal", "refresh"],
+	props: {
+		data: {
+			type: Array,
+			required: true,
+			default: function() {
+				return [];
+			},
+		},
+		closeModal: {
+			type: Function,
+			required: true,
+		},
+		refresh: {
+			type: Function,
+			required:true,
+		},
+	},
 	data() {
 		return {
 			loading: false,

@@ -51,14 +51,14 @@
 <script>
 export default {
 	name: "SortPane",
-	props: [
-		"shouldDisplay",
-		"sortHashValue",
-		"updateSortHashValue",
-		"updateNoTranslationOnly",
-		"noTranslationOnlyValue",
-		"showModal",
-	],
+	props: {
+		shouldDisplay: { type: Boolean, required: true },
+		sortHashValue: { type: String, required: true },
+		updateSortHashValue: { type: Function, required: true },
+		updateNoTranslationOnly: { type: Function, required: true },
+		noTranslationOnlyValue: { type: Boolean, required: true },
+		showModal: { type: Function, required: true },
+	},
 };
 </script>
 
