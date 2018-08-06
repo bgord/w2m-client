@@ -79,6 +79,12 @@ $almost-white: #fcfefb;
     align-items: $ai;
 }
 
+@mixin to-right($ai:stretch) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: $ai;
+}
+
 @mixin top-sticky() {
     position: sticky;
     top: 0;

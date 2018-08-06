@@ -103,20 +103,17 @@ export default {
 @import "../base.scss";
 .blur {
 	position: absolute;
-	background: rgba(0, 0, 0, 0.75);
 	width: 100%;
 	height: 100%;
+	background: rgba(0, 0, 0, 0.75);
 }
 .close-wrapper {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	@include space-between($ai: center);
 	margin-bottom: 1rem;
 }
 
 .cta-wrapper {
-	display: flex;
-	justify-content: flex-end;
+	@include to-right;
 	margin-top: 1.5rem;
 }
 
@@ -124,17 +121,17 @@ export default {
 	@include shadow;
 	position: absolute;
 	left: calc(50% - 25rem);
-	width: 50rem;
 	margin-top: 1.5rem;
 	padding: 1rem;
-	border: 4px solid $background;
+	width: 50rem;
 	background: $almost-white;
+	border: 4px solid $background;
 	z-index: 4;
 	&__close {
-		display: block;
 		@include btn-reset;
-		height: 1rem;
+		display: block;
 		margin-right: 1rem;
+		height: 1rem;
 		font-weight: 600;
 		color: #4286f4;
 		letter-spacing: 1px;
@@ -145,11 +142,11 @@ export default {
 	}
 	&__cta {
 		@include btn-cta($bc: #4286f4, $fc: $almost-white);
+		margin-right: 0;
 		height: 1.5rem;
-		border-radius: 3px;
 		font-size: 12px;
 		font-weight: 600;
-		margin-right: 0;
+		border-radius: 3px;
 		&--loading {
 			opacity: 0.5;
 			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
