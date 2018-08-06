@@ -1,51 +1,46 @@
 <template>
-	<div :class="{'word-container': true, uncollapsed: !collapsed}">
-		<div class="word__upper">
-			<div :style="{'display':'flex', 'align-items': 'center'}">
+	<div :class="{'view-item__container': true, 'view-item__container--uncollapsed': !collapsed}">
+		<div class="view-item__upper">
+			<div class="view-item__upper__container">
 				<span
-				    class="word"
+				    class="view-item__upper__context"
 				    v-html="highlightWordInContext"
 				/>
-				<span class="trans">{{ translation | withParenthesis }}</span>
+				<span class="view-item__upper__translation">{{ translation | withParenthesis }}</span>
 			</div>
 			<button
 			    @click="toggleCollapse"
-			    class="word__expand"
+			    class="view-item__upper__expand"
 			>
 				{{hideExpandText}}
 				</button>
 		</div>
-		<div
-		    v-if="!collapsed"
-		    class="word__middle"
-		>
-			<div>
-				<form @submit.prevent="editContext">
-					<input
-					    v-model="context"
-					    :class="{'input':true,'input--changed':hasContextChanged}"
-					    ref="context"
-					    @keyup.esc="context=''"
-					/>
-					<button
-					    :disabled="editContextPending"
-					    :class="{'btnek':true,'btnek--loading': editContextPending}"
-					    type="submit"
-					>
-						SAVE CONTEXT
-						</button>
-				</form>
-			</div>
+		<div v-if="!collapsed">
+			<form @submit.prevent="editContext">
+				<input
+				    v-model="context"
+				    :class="{'view-item__input':true,'view-item__input--changed':hasContextChanged}"
+				    ref="context"
+				    @keyup.esc="context=''"
+				/>
+				<button
+				    :disabled="editContextPending"
+				    :class="{'view-item__submit':true,'view-item__submit--loading': editContextPending}"
+				    type="submit"
+				>
+					SAVE CONTEXT
+					</button>
+			</form>
 			<form @submit.prevent="editTranslation">
 				<input
 				    v-model="translation"
-				    :class="{'input':true,'input--changed':hasTranslationChanged}"
+				    :class="{'view-item__input':true,'view-item__input--changed':hasTranslationChanged}"
 				    ref="translation"
 				    @keyup.esc="translation=''"
 				/>
 				<button
 				    :disabled="editTranslationPending"
-				    :class="{'btnek':true,'btnek--loading': editTranslationPending}"
+				    :class="{'view-item__submit':true,'view-item__submit--loading': editTranslationPending}"
 				    type="submit"
 				>
 					SAVE TRANSLATION
@@ -53,44 +48,44 @@
 			</form>
 			<div
 			    v-if="resource.suggestedTranslations.length"
-			    class="sugg-trans__text"
+			    class="view-item__sugg-trans__text"
 			>
 				Suggested translations:
-	</div>
-	<ul
-	    v-if="resource.suggestedTranslations.length"
-	    class="sugg-trans__list"
-	>
-		<li
-		    v-for="(suggestion, index) in resource.suggestedTranslations"
-		    :key="index"
-		    @click="chooseSugestion(suggestion)"
-		    class="sugg-trans__item"
+		</div>
+		<ul
+		    v-if="resource.suggestedTranslations.length"
+		    class="view-item__sugg-trans__list"
 		>
-			{{ suggestion }}
-			</li>
-			</ul>
-			</div>
-			<div class=" word__lower ">
-				<div>
-					<div :class="{word__badge:true, blurred: !resource.downloadResult} ">{{ MP3Msg }}</div>
-					<div :class="{word__badge:true, blurred: !resource.suggestedTranslations.length} ">{{suggestionsMsg}}</div>
-				</div>
-				<div class="button-wrapper">
-					<button
-					    v-if="!collapsed"
-					    @click="resetWord"
-					    class="word__expand"
-					>RESET</button>
-						<button
-						    v-if="!collapsed"
-						    @click="deleteWord"
-						    class="delete"
-						>DELETE</button>
+			<li
+			    v-for="(suggestion, index) in resource.suggestedTranslations"
+			    :key="index"
+			    @click="chooseSugestion(suggestion)"
+			    class="view-item__sugg-trans__item"
+			>
+				{{ suggestion }}
+				</li>
+				</ul>
+	</div>
+	<div class=" view-item__lower ">
+		<div>
+			<div :class="{'view-item__lower__word-badge':true, 'view-item__lower__word-badge--blurred': !resource.downloadResult} ">{{ MP3Msg }}</div>
+			<div :class="{'view-item__lower__word-badge':true, 'view-item__lower__word-badge--blurred': !resource.suggestedTranslations.length} ">{{suggestionsMsg}}</div>
+		</div>
+		<div class="view-item__lower__buttons-wrapper">
+			<button
+			    v-if="!collapsed"
+			    @click="resetWord"
+			    class="view-item__lower__reset"
+			>RESET</button>
+				<button
+				    v-if="!collapsed"
+				    @click="deleteWord"
+				    class="view-item__lower__delete"
+				>DELETE</button>
 
-				</div>
-			</div>
-			</div>
+		</div>
+	</div>
+	</div>
 </template>
 
 <script>
@@ -200,7 +195,7 @@ export default {
 			let ret = context ? context : word;
 			return ret.replace(
 				word,
-				`<span class="word--hightlighted">${word}</span>`
+				`<span class="view-item__upper__context--highlighted">${word}</span>`
 			);
 		},
 		MP3Msg() {
@@ -246,119 +241,127 @@ export default {
 
 <style lang="scss">
 @import "../base.scss";
-.word-container {
-	@include normal;
-	margin-bottom: 1.5rem;
-	padding-bottom: 0.5rem;
-	min-height: 3.5rem;
-	background: #fafafa;
-	border-left: 3px solid $background;
-	border-right: 3px solid $background;
-}
-.word {
-	display: inline-block;
-	padding: 3px 0.5rem 0 1rem;
+
+.view-item {
+	&__container {
+		@include normal;
+		margin-bottom: 1.5rem;
+		padding-bottom: 0.5rem;
+		min-height: 3.5rem;
+		background: #fafafa;
+		border-left: 3px solid $background;
+		border-right: 3px solid $background;
+		&--uncollapsed {
+			@include light-shadow;
+		}
+	}
 	&__upper {
 		@include space-between($ai: baseline);
+		&__container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		&__expand {
+			margin: 7px 1rem 0 0;
+			height: 1rem;
+			color: $blue;
+			letter-spacing: 1px;
+			font-weight: 600;
+		}
+		&__context {
+			display: inline-block;
+			padding: 3px 0.5rem 0 1rem;
+			&--highlighted {
+				background: $background;
+			}
+		}
+		&__translation {
+			@include descriptive-text($fst: normal);
+			padding-top: 2px;
+		}
+	}
+	&__input {
+		@include size($h: 1.75rem, $w: 20rem);
+		margin: 1rem 1rem 0 1rem;
+		padding-left: 0.5rem;
+		border: 1px solid #eee;
+		border-left: 2px solid #eee;
+		border-radius: 2px;
+		&--changed {
+			border-left: 2px solid $blue;
+		}
+	}
+	&__submit {
+		@include btn-cta($bc: $blue, $fc: $almost-white);
+		margin-left: 0;
+		height: 1.5rem;
+		font-size: 12px;
+		font-weight: 600;
+		border-radius: 3px;
+		&--loading {
+			opacity: 0.5;
+			@include strong-shadow;
+			&:hover {
+				cursor: auto;
+			}
+		}
+		&:focus {
+			@include shadow;
+		}
+		&:hover {
+			opacity: 0.9;
+		}
+	}
+	&__sugg-trans {
+		&__text {
+			@include descriptive-text;
+			padding: 1rem 0 0 1rem;
+		}
+		&__list {
+			display: inline-block;
+			margin: 6px auto 1rem auto;
+			padding-left: 1rem;
+		}
+		&__item {
+			@include descriptive-text($c: #555);
+			&:hover {
+				cursor: pointer;
+				opacity: 0.85;
+			}
+		}
 	}
 	&__lower {
 		@include space-between;
 		margin: 0.5rem 0 0.5rem 1rem;
 		height: 1rem;
-	}
-	&__badge {
-		@include label-text($c: #ab6efe);
-		display: inline-block;
-		margin-right: 0.5rem;
-		padding: 0 0.25rem;
-		background: #eee3ff;
-	}
-	&--hightlighted {
-		background: $background;
-	}
-	&__expand {
-		margin: 7px 1rem 0 0;
-		height: 1rem;
-		color: $blue;
-		letter-spacing: 1px;
-		font-weight: 600;
-	}
-}
-.blurred {
-	opacity: 0.5;
-}
-
-.input {
-	@include size($h: 1.75rem, $w: 20rem);
-	margin: 1rem 1rem 0 1rem;
-	padding-left: 0.5rem;
-	border: 1px solid #eee;
-	border-left: 2px solid #eee;
-	border-radius: 2px;
-	&--changed {
-		border-left: 2px solid $blue;
-	}
-}
-
-.btnek {
-	@include btn-cta($bc: $blue, $fc: $almost-white);
-	margin-left: 0;
-	height: 1.5rem;
-	font-size: 12px;
-	font-weight: 600;
-	border-radius: 3px;
-	&--loading {
-		opacity: 0.5;
-		@include strong-shadow;
-		&:hover {
-			cursor: auto;
+		&__word-badge {
+			@include label-text($c: #ab6efe);
+			display: inline-block;
+			margin-right: 0.5rem;
+			padding: 0 0.25rem;
+			background: #eee3ff;
+			&--blurred {
+				opacity: 0.5;
+			}
+		}
+		&__buttons-wrapper {
+			margin-top: -5px;
+		}
+		&__reset {
+			margin: 7px 1rem 0 0;
+			height: 1rem;
+			color: $blue;
+			letter-spacing: 1px;
+			font-weight: 600;
+		}
+		&__delete {
+			margin: 1px 1rem 0 0;
+			height: 1rem;
+			font-weight: 600;
+			color: $red;
+			letter-spacing: 1px;
 		}
 	}
-	&:focus {
-		@include shadow;
-	}
-	&:hover {
-		opacity: 0.9;
-	}
-}
-
-.sugg-trans__list {
-	display: inline-block;
-	margin: 6px auto 1rem auto;
-	padding-left: 1rem;
-}
-
-.sugg-trans__item {
-	@include descriptive-text($c: #555);
-	&:hover {
-		cursor: pointer;
-		opacity: 0.85;
-	}
-}
-
-.uncollapsed {
-	@include light-shadow;
-}
-
-.sugg-trans__text {
-	@include descriptive-text;
-	padding: 1rem 0 0 1rem;
-}
-
-.trans {
-	@include descriptive-text($fst: normal);
-	padding-top: 2px;
-}
-
-.delete {
-	margin: 1px 1rem 0 0;
-	height: 1rem;
-	font-weight: 600;
-	color: $red;
-	letter-spacing: 1px;
-}
-
-.button-wrapper {
-	margin-top: -5px;
 }
 </style>
