@@ -22,7 +22,7 @@ export default {
 @import "../base.scss";
 .spinner {
 	$side-length: 64px;
-	@include absolute;
+	@include absolute($top: 50%, $left: 50%);
 	@include size($h: $side-length, $w: $side-length);
 	margin: -($side-length) 0 0 (-($side-length / 2));
 	border-radius: 50%;
