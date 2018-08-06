@@ -292,10 +292,9 @@ export default {
 }
 
 .input {
+	@include size($h: 1.75rem, $w: 20rem);
 	margin: 1rem 1rem 0 1rem;
 	padding-left: 0.5rem;
-	height: 1.75rem;
-	width: 20rem;
 	border: 1px solid #eee;
 	border-left: 2px solid #eee;
 	border-radius: 2px;
