@@ -76,7 +76,7 @@ export default {
 		display: flex;
 	}
 	&__sortby {
-		@include label-text;
+		@include label-text($fw: 600);
 	}
 	&__select {
 		margin-left: 0.5rem;

@@ -247,12 +247,11 @@ export default {
 <style lang="scss">
 @import "../base.scss";
 .word-container {
+	@include normal;
 	margin-bottom: 1.5rem;
 	padding-bottom: 0.5rem;
 	min-height: 3.5rem;
 	background: #fafafa;
-	font-weight: 600;
-	font-size: 14px;
 	border-left: 3px solid $background;
 	border-right: 3px solid $background;
 }
@@ -268,12 +267,11 @@ export default {
 		height: 1rem;
 	}
 	&__badge {
+		@include label-text($c: #ab6efe);
 		display: inline-block;
 		margin-right: 0.5rem;
 		padding: 0 0.25rem;
 		background: #eee3ff;
-		color: #ab6efe;
-		font-size: 12px;
 	}
 	&--hightlighted {
 		background: $background;
@@ -331,9 +329,7 @@ export default {
 }
 
 .sugg-trans__item {
-	font-size: 13px;
-	color: #555;
-	font-style: italic;
+	@include descriptive-text($c: #555);
 	&:hover {
 		cursor: pointer;
 		opacity: 0.85;
@@ -347,13 +343,11 @@ export default {
 .sugg-trans__text {
 	@include descriptive-text;
 	padding: 1rem 0 0 1rem;
-	font-size: 12px;
 }
 
 .trans {
+	@include descriptive-text($fst: normal);
 	padding-top: 2px;
-	color: #888;
-	font-size: 12px;
 }
 
 .delete {
