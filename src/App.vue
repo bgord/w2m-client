@@ -1,7 +1,7 @@
 <template>
 	<div class="wrapper">
 		<Nav />
-		<PrepareWords v-if="showPrepareWordsModal" :closeModal="closeModal" :data="data" />
+		<PrepareWords v-if="showPrepareWordsModal" :closeModal="closeModal" :data="data" :refresh="fetchWords" />
 		<Spinner :loading=" loading " />
 		<List :loading="loading " :data="data " :refresh="fetchWords " :showModal="showModal " />
 	</div>
@@ -40,7 +40,8 @@ export default {
 		showModal() {
 			this.showPrepareWordsModal = true;
 		},
-		closeModal() {
+		closeModal(block) {
+			if (block) return;
 			this.showPrepareWordsModal = false;
 		},
 	},

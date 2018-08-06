@@ -1,11 +1,16 @@
 <template>
 	<div class="blur">
-		<div class="prepare-words" @keydown.esc="closeModal" ref="modal" tabindex="-1">
+		<div class="prepare-words" @keydown.esc="closeModal(blockClose)" ref="modal" tabindex="-1">
 			<div class="close-wrapper">
-				<button @click="closeModal" class="prepare-words__close">Close</button>
+				<div>
+					<h3 :style="{'margin': '0'}">Words to archive</h3>
+				</div>
+				<button @click="closeModal(blockClose)" class="prepare-words__close">Close</button>
 			</div>
-			<code v-html="toHtmlCsv" class="prepare-words__code" />
-			<div class="close-wrapper">
+			<div class="prepare-words__code">
+				<code v-html="toHtmlCsv" />
+			</div>
+			<div class="cta-wrapper">
 				<button :disabled="loading" :class="{'prepare-words__cta':true,'prepare-words__cta--loading': loading}" @click="copyAndArchive">Copy and archive</button>
 			</div>
 		</div>
@@ -20,9 +25,13 @@ export default {
 	data() {
 		return {
 			loading: false,
+			success: undefined,
 		};
 	},
 	computed: {
+		blockClose() {
+			return this.loading && !this.success;
+		},
 		toCsv() {
 			return this.data
 				.map(e => ({
@@ -60,8 +69,11 @@ export default {
 						})
 					)
 				);
+				this.success = true;
 			} catch (e) {
+				this.success = false;
 				alert("Error while archiving.");
+			} finally {
 				this.loading = false;
 			}
 		},
@@ -82,15 +94,23 @@ export default {
 }
 .close-wrapper {
 	display: flex;
-	justify-content: flex-end;
-	margin: 0.5rem 0;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
 }
+
+.cta-wrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1.5rem;
+}
+
 .prepare-words {
 	@include shadow;
 	position: absolute;
 	left: calc(50% - 25rem);
 	width: 50rem;
-	margin-top: 2rem;
+	margin-top: 1.5rem;
 	padding: 1rem;
 	border: 4px solid $background;
 	background: $almost-white;
@@ -99,11 +119,14 @@ export default {
 		display: block;
 		@include btn-reset;
 		height: 1rem;
-		margin-top: 7px;
 		margin-right: 1rem;
 		font-weight: 600;
 		color: #4286f4;
 		letter-spacing: 1px;
+	}
+	&__code {
+		@include light-border;
+		padding: 1rem;
 	}
 	&__cta {
 		@include btn-cta($bc: #4286f4, $fc: $almost-white);
@@ -111,6 +134,7 @@ export default {
 		border-radius: 3px;
 		font-size: 12px;
 		font-weight: 600;
+		margin-right: 0;
 		&--loading {
 			opacity: 0.5;
 			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
