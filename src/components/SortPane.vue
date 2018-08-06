@@ -16,12 +16,12 @@
 					    value="default"
 					>
 						-- --
-					</option>
-					<option value="a-asc">A - Z</option>
-					<option value="a-desc">Z - A</option>
-					<option value="t-min">Min translations</option>
-					<option value="t-max">Max translations</option>
-				</select>
+						</option>
+						<option value="a-asc">A - Z</option>
+						<option value="a-desc">Z - A</option>
+						<option value="t-min">Min translations</option>
+						<option value="t-max">Max translations</option>
+						</select>
 			</div>
 			<div class="sort-pane__checkbox-wrapper">
 				<input
@@ -36,7 +36,7 @@
 				    for="noTranslationOnlyValue"
 				>
 					no translation only
-				</label>
+					</label>
 			</div>
 		</div>
 		<button
@@ -44,8 +44,8 @@
 		    @click="showModal"
 		>
 			PREPARE
-		</button>
-	</div>
+			</button>
+			</div>
 </template>
 
 <script>
@@ -68,7 +68,7 @@ export default {
 .sort-pane {
 	@include top-sticky;
 	@include b-light-border;
-	@include space-between($ai:center);
+	@include space-between($ai: center);
 	padding-left: 1.125rem;
 	height: 3rem;
 	background: $almost-white;
@@ -82,7 +82,7 @@ export default {
 		margin-left: 0.5rem;
 	}
 	&__checkbox-wrapper {
-		@include space-between($ai:center);
+		@include space-between($ai: center);
 	}
 	&__label {
 		@include label-text;
@@ -93,9 +93,9 @@ export default {
 	&__cta {
 		@include btn-cta($bc: #a8ff8f, $fc: #58aa40);
 		height: 1.75rem;
-		border-radius: 3px;
 		font-size: 12px;
 		font-weight: 600;
+		border-radius: 3px;
 		&:hover {
 			border: 1px solid #eee;
 		}
