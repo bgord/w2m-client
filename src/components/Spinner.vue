@@ -1,5 +1,8 @@
 <template>
-    <div class="spinner" :style="show"/>	
+	<div
+	    class="spinner"
+	    :style="show"
+	/>
 </template>
 
 <script>

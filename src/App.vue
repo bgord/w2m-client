@@ -1,9 +1,19 @@
 <template>
 	<div class="wrapper">
 		<Nav />
-		<PrepareWords v-if="showPrepareWordsModal" :closeModal="closeModal" :data="data" :refresh="fetchWords" />
+		<PrepareWords
+		    v-if="showPrepareWordsModal"
+		    :closeModal="closeModal"
+		    :data="data"
+		    :refresh="fetchWords"
+		/>
 		<Spinner :loading=" loading " />
-		<List :loading="loading " :data="data " :refresh="fetchWords " :showModal="showModal " />
+		<List
+		    :loading="loading "
+		    :data="data "
+		    :refresh="fetchWords "
+		    :showModal="showModal "
+		/>
 	</div>
 </template>
 

@@ -2,45 +2,91 @@
 	<div :class="{'word-container': true, uncollapsed: !collapsed}">
 		<div class="word__upper">
 			<div :style="{'display':'flex', 'align-items': 'center'}">
-				<span class="word" v-html="highlightWordInContext" />
+				<span
+				    class="word"
+				    v-html="highlightWordInContext"
+				/>
 				<span class="trans">{{ translation | withParenthesis }}</span>
 			</div>
-			<button @click="toggleCollapse" class="word__expand">
+			<button
+			    @click="toggleCollapse"
+			    class="word__expand"
+			>
 				{{hideExpandText}}
-			</button>
+				</button>
 		</div>
-		<div v-if="!collapsed" class="word__middle">
+		<div
+		    v-if="!collapsed"
+		    class="word__middle"
+		>
 			<div>
 				<form @submit.prevent="editContext">
-					<input v-model="context" :class="{'input':true,'input--changed':hasContextChanged}" ref="context" @keyup.esc="context=''" />
-					<button :disabled="editContextPending" :class="{'btnek':true,'btnek--loading': editContextPending}" type="submit">SAVE CONTEXT</button>
+					<input
+					    v-model="context"
+					    :class="{'input':true,'input--changed':hasContextChanged}"
+					    ref="context"
+					    @keyup.esc="context=''"
+					/>
+					<button
+					    :disabled="editContextPending"
+					    :class="{'btnek':true,'btnek--loading': editContextPending}"
+					    type="submit"
+					>SAVE CONTEXT</button>
 				</form>
 			</div>
 			<form @submit.prevent="editTranslation">
-				<input v-model="translation" :class="{'input':true,'input--changed':hasTranslationChanged}" ref="translation" @keyup.esc="translation=''" />
-				<button :disabled="editTranslationPending" :class="{'btnek':true,'btnek--loading': editTranslationPending}" type="submit">SAVE TRANSLATION</button>
+				<input
+				    v-model="translation"
+				    :class="{'input':true,'input--changed':hasTranslationChanged}"
+				    ref="translation"
+				    @keyup.esc="translation=''"
+				/>
+				<button
+				    :disabled="editTranslationPending"
+				    :class="{'btnek':true,'btnek--loading': editTranslationPending}"
+				    type="submit"
+				>SAVE TRANSLATION</button>
 			</form>
-			<div v-if="resource.suggestedTranslations.length" class="sugg-trans__text">
+			<div
+			    v-if="resource.suggestedTranslations.length"
+			    class="sugg-trans__text"
+			>
 				Suggested translations:
-			</div>
-			<ul v-if="resource.suggestedTranslations.length" class="sugg-trans__list">
-				<li v-for="(suggestion, index) in resource.suggestedTranslations" :key="index" @click="chooseSugestion(suggestion)" class="sugg-trans__item">
-					{{ suggestion }}
-				</li>
-			</ul>
-		</div>
-		<div class=" word__lower ">
-			<div>
-				<div :class="{word__badge:true, blurred: !resource.downloadResult} ">{{ MP3Msg }}</div>
-				<div :class="{word__badge:true, blurred: !resource.suggestedTranslations.length} ">{{suggestionsMsg}}</div>
-			</div>
-			<div>
-				<button v-if="!collapsed" @click="resetWord" class="word__expand">RESET</button>
-				<button v-if="!collapsed" @click="deleteWord" class="delete">DELETE</button>
-
-			</div>
-		</div>
 	</div>
+	<ul
+	    v-if="resource.suggestedTranslations.length"
+	    class="sugg-trans__list"
+	>
+		<li
+		    v-for="(suggestion, index) in resource.suggestedTranslations"
+		    :key="index"
+		    @click="chooseSugestion(suggestion)"
+		    class="sugg-trans__item"
+		>
+			{{ suggestion }}
+			</li>
+			</ul>
+			</div>
+			<div class=" word__lower ">
+				<div>
+					<div :class="{word__badge:true, blurred: !resource.downloadResult} ">{{ MP3Msg }}</div>
+					<div :class="{word__badge:true, blurred: !resource.suggestedTranslations.length} ">{{suggestionsMsg}}</div>
+				</div>
+				<div>
+					<button
+					    v-if="!collapsed"
+					    @click="resetWord"
+					    class="word__expand"
+					>RESET</button>
+						<button
+						    v-if="!collapsed"
+						    @click="deleteWord"
+						    class="delete"
+						>DELETE</button>
+
+				</div>
+			</div>
+			</div>
 </template>
 
 <script>

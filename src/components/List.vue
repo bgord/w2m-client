@@ -1,16 +1,38 @@
 <template>
-	<div v-if="!loading" class="app-container">
+	<div
+	    v-if="!loading"
+	    class="app-container"
+	>
 
-		<SortPane :shouldDisplay="data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal"/>
-		<ul v-if="data.length" class="view-list">
-			<li v-for="word in sortedData" :key="word._id">
-				<Word :resource="word" :refresh="refresh" />
-			</li>
-		</ul>
-		<div v-else class="no-results">
-			No active words...
-		</div>
-	</div>
+		<SortPane
+		    :shouldDisplay="data.length"
+		    :updateSortHashValue="updateSortHashValue"
+		    :sortHashValue="sortHashValue"
+		    :noTranslationOnlyValue="noTranslationOnlyValue"
+		    :updateNoTranslationOnly="updateNoTranslationOnly"
+		    :showModal="showModal"
+		/>
+		<ul
+		    v-if="data.length"
+		    class="view-list"
+		>
+			<li
+			    v-for="word in sortedData"
+			    :key="word._id"
+			>
+				<Word
+				    :resource="word"
+				    :refresh="refresh"
+				/>
+				</li>
+				</ul>
+				<div
+				    v-else
+				    class="no-results"
+				>
+					No active words...
+					</div>
+					</div>
 
 </template>
 

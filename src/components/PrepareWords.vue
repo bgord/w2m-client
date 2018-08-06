@@ -1,19 +1,31 @@
 <template>
 	<div class="blur">
-		<div class="prepare-words" @keydown.esc="closeModal(blockClose)" ref="modal" tabindex="-1">
+		<div
+		    class="prepare-words"
+		    @keydown.esc="closeModal(blockClose)"
+		    ref="modal"
+		    tabindex="-1"
+		>
 			<div class="close-wrapper">
 				<div>
 					<h3 :style="{'margin': '0'}">Words to archive</h3>
 				</div>
-				<button @click="closeModal(blockClose)" class="prepare-words__close">Close</button>
+				<button
+				    @click="closeModal(blockClose)"
+				    class="prepare-words__close"
+				>Close</button>
 			</div>
 			<div class="prepare-words__code">
 				<code v-html="toHtmlCsv" />
 			</div>
 			<div class="cta-wrapper">
-				<button :disabled="loading" :class="{'prepare-words__cta':true,'prepare-words__cta--loading': loading}" @click="copyAndArchive">Copy and archive</button>
+				<button
+				    :disabled="loading"
+				    :class="{'prepare-words__cta':true,'prepare-words__cta--loading': loading}"
+				    @click="copyAndArchive"
+				>Copy and archive</button>
 			</div>
-		</div>
+	</div>
 	</div>
 </template>
 

@@ -1,27 +1,49 @@
 <template>
-	<div v-if="shouldDisplay" class="sort-pane">
+	<div
+	    v-if="shouldDisplay"
+	    class="sort-pane"
+	>
 		<div class="sort-pane__content">
 			<div>
 				<span class="sort-pane__sortby">SORT BY:</span>
-				<select class="sort-pane__select" :value="sortHashValue" @change="updateSortHashValue">
-					<option selected value="default">-- --</option>
-					<option value="a-asc">A - Z</option>
-					<option value="a-desc">Z - A</option>
-					<option value="t-min">Min translations</option>
-					<option value="t-max">Max translations</option>
-				</select>
+				<select
+				    class="sort-pane__select"
+				    :value="sortHashValue"
+				    @change="updateSortHashValue"
+				>
+					<option
+					    selected
+					    value="default"
+					>-- --</option>
+						<option value="a-asc">A - Z</option>
+						<option value="a-desc">Z - A</option>
+						<option value="t-min">Min translations</option>
+						<option value="t-max">Max translations</option>
+						</select>
 			</div>
 
 			<div class="sort-pane__checkbox-wrapper">
-				<input class="sort-pane__checkbox" type="checkbox" id="noTranslationOnlyValue" :checked="noTranslationOnlyValue" @change="updateNoTranslationOnly" />
-				<label class="sort-pane__label" for="noTranslationOnlyValue">
+				<input
+				    class="sort-pane__checkbox"
+				    type="checkbox"
+				    id="noTranslationOnlyValue"
+				    :checked="noTranslationOnlyValue"
+				    @change="updateNoTranslationOnly"
+				/>
+				<label
+				    class="sort-pane__label"
+				    for="noTranslationOnlyValue"
+				>
 					no translation only
-				</label>
+					</label>
 			</div>
 		</div>
 
-		<button class="sort-pane__cta" @click="showModal">PREPARE</button>
-	</div>
+		<button
+		    class="sort-pane__cta"
+		    @click="showModal"
+		>PREPARE</button>
+			</div>
 </template>
 
 <script>
