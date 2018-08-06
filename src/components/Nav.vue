@@ -1,6 +1,5 @@
 <template>
-	<nav class="nav">
-	</nav>
+	<nav class="nav" />
 </template>
 
 <script>
@@ -13,8 +12,8 @@ export default {
 <style lang="scss" scoped>
 @import "../base.scss";
 .nav {
-	background: $background;
-	height: 3rem;
 	@include shadow;
+	height: 3rem;
+	background: $background;
 }
 </style>
