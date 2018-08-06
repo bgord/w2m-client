@@ -279,7 +279,6 @@ export default {
 		background: $background;
 	}
 	&__expand {
-		@include btn-reset;
 		margin: 7px 1rem 0 0;
 		height: 1rem;
 		color: $blue;
@@ -358,7 +357,6 @@ export default {
 }
 
 .delete {
-	@include btn-reset;
 	margin: 1px 1rem 0 0;
 	height: 1rem;
 	font-weight: 600;

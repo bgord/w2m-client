@@ -126,7 +126,6 @@ export default {
 	border: 4px solid $background;
 	z-index: 4;
 	&__close {
-		@include btn-reset;
 		display: block;
 		margin-right: 1rem;
 		height: 1rem;
