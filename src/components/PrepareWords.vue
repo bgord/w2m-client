@@ -104,7 +104,7 @@ export default {
 .blur {
 	@include whole-screen;
 	@include overlay-bg;
-	position: absolute;
+	@include absolute;
 }
 .close-wrapper {
 	@include space-between($ai: center);
@@ -119,8 +119,7 @@ export default {
 .prepare-words {
 	@include shadow;
 	@include stretch-width($w: 50rem);
-	position: absolute;
-	left: calc(50% - 25rem);
+	@include absolute($left: calc(50% - 25rem));
 	margin-top: 1.5rem;
 	padding: 1rem;
 	background: $almost-white;
