@@ -13,7 +13,7 @@
 			    class="view-item__upper__expand"
 			>
 				{{hideExpandText}}
-				</button>
+			</button>
 		</div>
 		<div v-if="!collapsed">
 			<form @submit.prevent="editContext">
@@ -29,7 +29,7 @@
 				    type="submit"
 				>
 					SAVE CONTEXT
-					</button>
+				</button>
 			</form>
 			<form @submit.prevent="editTranslation">
 				<input
@@ -44,53 +44,55 @@
 				    type="submit"
 				>
 					SAVE TRANSLATION
-					</button>
+				</button>
 			</form>
 			<div
 			    v-if="resource.suggestedTranslations.length"
 			    class="view-item__sugg-trans__text"
 			>
 				Suggested translations:
-		</div>
-		<ul
-		    v-if="resource.suggestedTranslations.length"
-		    class="view-item__sugg-trans__list"
-		>
-			<li
-			    v-for="(suggestion, index) in resource.suggestedTranslations"
-			    :key="index"
-			    @click="chooseSugestion(suggestion)"
-			    class="view-item__sugg-trans__item"
+			</div>
+			<ul
+		    	v-if="resource.suggestedTranslations.length"
+		    	class="view-item__sugg-trans__list"
 			>
-				{{ suggestion }}
+				<li
+			    	v-for="(suggestion, index) in resource.suggestedTranslations"
+			    	:key="index"
+			    	@click="chooseSugestion(suggestion)"
+			    	class="view-item__sugg-trans__item"
+				>
+					{{ suggestion }}
 				</li>
-				</ul>
-	</div>
-	<div class=" view-item__lower ">
-		<div>
-			<div :class="{'view-item__lower__word-badge':true, 'view-item__lower__word-badge--blurred': !resource.downloadResult} ">{{ MP3Msg }}</div>
-			<div :class="{'view-item__lower__word-badge':true, 'view-item__lower__word-badge--blurred': !resource.suggestedTranslations.length} ">{{suggestionsMsg}}</div>
+			</ul>
 		</div>
-		<div class="view-item__lower__buttons-wrapper">
-			<button
-			    v-if="!collapsed"
-			    @click="resetWord"
-			    class="view-item__lower__reset"
-			>RESET</button>
+		<div class=" view-item__lower ">
+			<div>
+				<div :class="{'view-item__lower__word-badge':true, 'view-item__lower__word-badge--blurred': !resource.downloadResult} ">{{ MP3Msg }}</div>
+				<div :class="{'view-item__lower__word-badge':true, 'view-item__lower__word-badge--blurred': !resource.suggestedTranslations.length} ">{{suggestionsMsg}}</div>
+			</div>
+			<div class="view-item__lower__buttons-wrapper">
 				<button
 				    v-if="!collapsed"
-				    @click="deleteWord"
-				    class="view-item__lower__delete"
-				>DELETE</button>
-
+				    @click="resetWord"
+				    class="view-item__lower__reset"
+				>
+					RESET
+				</button>
+				<button
+			    	v-if="!collapsed"
+			    	@click="deleteWord"
+			    	class="view-item__lower__delete"
+				>
+					DELETE
+				</button>
+			</div>
 		</div>
-	</div>
 	</div>
 </template>
 
 <script>
 import axios from "axios";
-
 export default {
 	name: "Word",
 	data() {
@@ -241,7 +243,6 @@ export default {
 
 <style lang="scss">
 @import "../base.scss";
-
 .view-item {
 	&__container {
 		@include normal;
@@ -297,11 +298,12 @@ export default {
 	&__sugg-trans {
 		&__text {
 			@include descriptive-text;
+			margin-left: 5px;
 			padding: 1rem 0 0 1rem;
 		}
 		&__list {
 			display: inline-block;
-			margin: 6px auto 1rem auto;
+			margin: 6px auto 1rem 5px;
 			padding-left: 1rem;
 		}
 		&__item {
