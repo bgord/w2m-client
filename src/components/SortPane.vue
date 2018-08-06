@@ -14,14 +14,15 @@
 					<option
 					    selected
 					    value="default"
-					>-- --</option>
-						<option value="a-asc">A - Z</option>
-						<option value="a-desc">Z - A</option>
-						<option value="t-min">Min translations</option>
-						<option value="t-max">Max translations</option>
-						</select>
+					>
+						-- --
+					</option>
+					<option value="a-asc">A - Z</option>
+					<option value="a-desc">Z - A</option>
+					<option value="t-min">Min translations</option>
+					<option value="t-max">Max translations</option>
+				</select>
 			</div>
-
 			<div class="sort-pane__checkbox-wrapper">
 				<input
 				    class="sort-pane__checkbox"
@@ -35,15 +36,16 @@
 				    for="noTranslationOnlyValue"
 				>
 					no translation only
-					</label>
+				</label>
 			</div>
 		</div>
-
 		<button
 		    class="sort-pane__cta"
 		    @click="showModal"
-		>PREPARE</button>
-			</div>
+		>
+			PREPARE
+		</button>
+	</div>
 </template>
 
 <script>
@@ -64,17 +66,12 @@ export default {
 @import "../base.scss";
 
 .sort-pane {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	position: sticky;
-	top: 0;
-	left: 0;
+	@include top-sticky;
+	@include b-light-border;
+	@include space-between($ai:center);
 	padding-left: 1.125rem;
 	height: 3rem;
 	background: $almost-white;
-	border-bottom: 1px solid #eee;
-	z-index: 3;
 	&__content {
 		display: flex;
 	}
@@ -85,8 +82,7 @@ export default {
 		margin-left: 0.5rem;
 	}
 	&__checkbox-wrapper {
-		display: flex;
-		align-items: center;
+		@include space-between($ai:center);
 	}
 	&__label {
 		@include label-text;
