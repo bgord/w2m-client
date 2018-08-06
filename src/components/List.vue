@@ -3,7 +3,6 @@
 	    v-if="!loading"
 	    class="app-container"
 	>
-
 		<SortPane
 		    :shouldDisplay="data.length"
 		    :updateSortHashValue="updateSortHashValue"
@@ -24,15 +23,15 @@
 				    :resource="word"
 				    :refresh="refresh"
 				/>
-				</li>
-				</ul>
-				<div
-				    v-else
-				    class="no-results"
-				>
-					No active words...
-					</div>
-					</div>
+			</li>
+		</ul>
+		<div
+			v-else
+			class="no-results"
+		>
+			No active words...
+		</div>
+	</div>
 
 </template>
 
