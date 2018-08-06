@@ -21,10 +21,8 @@ export default {
 <style lang="scss" scoped>
 @import "../base.scss";
 .spinner {
+	@include absolute;
 	$side-length: 64px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
 	margin: -($side-length) 0 0 (-($side-length / 2));
 	height: $side-length;
 	width: $side-length;

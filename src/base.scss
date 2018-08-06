@@ -111,6 +111,12 @@ $green:#58aa40;
     background: $overlay-bg;
 }
 
+@mixin absolute($top:50%, $left:50%) {
+    position: absolute;
+    top: $top;
+    left: $left;
+}
+
 html,
 body {
     @include no-padd-marg;
