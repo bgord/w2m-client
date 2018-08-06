@@ -11,28 +11,30 @@
 				</button>
 			</transition>
 		</div>
-		<div v-if=" !collapsed ">
-			<form @submit.prevent="editContext">
-				<input v-model="context" :class="{ 'view-item__input':true, 'view-item__input--changed':hasContextChanged}" ref="context" @keyup.esc="context=''" />
-				<button :disabled="editContextPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editContextPending}" type="submit">
-					SAVE CONTEXT
-				</button>
-			</form>
-			<form @submit.prevent="editTranslation">
-				<input v-model="translation" :class="{ 'view-item__input ':true, 'view-item__input--changed ':hasTranslationChanged}" ref="translation" @keyup.esc="translation=''" />
-				<button :disabled="editTranslationPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editTranslationPending}" type="submit">
-					SAVE TRANSLATION
-				</button>
-			</form>
-			<div v-if="resource.suggestedTranslations.length" class="view-item__sugg-trans__text">
-				Suggested translations:
+		<transition name="appear-left" mode="out-in">
+			<div v-if=" !collapsed ">
+				<form @submit.prevent="editContext">
+					<input v-model="context" :class="{ 'view-item__input':true, 'view-item__input--changed':hasContextChanged}" ref="context" @keyup.esc="context=''" />
+					<button :disabled="editContextPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editContextPending}" type="submit">
+						SAVE CONTEXT
+					</button>
+				</form>
+				<form @submit.prevent="editTranslation">
+					<input v-model="translation" :class="{ 'view-item__input ':true, 'view-item__input--changed ':hasTranslationChanged}" ref="translation" @keyup.esc="translation=''" />
+					<button :disabled="editTranslationPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editTranslationPending}" type="submit">
+						SAVE TRANSLATION
+					</button>
+				</form>
+				<div v-if="resource.suggestedTranslations.length" class="view-item__sugg-trans__text">
+					Suggested translations:
+				</div>
+				<ul v-if="resource.suggestedTranslations.length" class="view-item__sugg-trans__list">
+					<li v-for="(suggestion, index) in resource.suggestedTranslations" :key="index" @click="chooseSugestion(suggestion)" class="view-item__sugg-trans__item">
+						{{ suggestion }}
+					</li>
+				</ul>
 			</div>
-			<ul v-if="resource.suggestedTranslations.length" class="view-item__sugg-trans__list">
-				<li v-for="(suggestion, index) in resource.suggestedTranslations" :key="index" @click="chooseSugestion(suggestion)" class="view-item__sugg-trans__item">
-					{{ suggestion }}
-				</li>
-			</ul>
-		</div>
+		</transition>
 		<div class=" view-item__lower">
 			<div>
 				<div :class="{ 'view-item__lower__word-badge ':true, 'view-item__lower__word-badge--blurred': !resource.downloadResult}">{{ MP3Msg }}</div>
@@ -311,5 +313,18 @@ export default {
 .switch-enter,
 .switch-leave-to {
 	transform: scale(0.8);
+}
+
+.appear-left-enter-active,
+.appear-left-leave-active {
+	transition: all 0.33s;
+}
+.appear-left-enter {
+	transform: translateY(-20px);
+}
+
+.appear-left-leave-to {
+	opacity: 0.3;
+	transform: translateY(5px);
 }
 </style>
