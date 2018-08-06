@@ -15,7 +15,7 @@
 				    class="prepare-words__modal__upper__close"
 				>
 					Close
-					</button>
+				</button>
 			</div>
 			<div class="prepare-words__modal__code">
 				<code v-html="toHtmlCsv" />
@@ -25,9 +25,11 @@
 				    :disabled="loading"
 				    :class="{'prepare-words__modal__cta__button':true,'prepare-words__modal__cta__button--loading': loading}"
 				    @click="copyAndArchive"
-				>Copy and archive</button>
+				>
+					Copy and archive
+				</button>
 			</div>
-	</div>
+		</div>
 	</div>
 </template>
 
