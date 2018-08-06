@@ -1,27 +1,29 @@
 <template>
-	<div class="blur">
+	<div class="prepare-words__container">
 		<div
-		    class="prepare-words"
+		    class="prepare-words__modal"
 		    @keydown.esc="closeModal(blockClose)"
 		    ref="modal"
 		    tabindex="-1"
 		>
-			<div class="close-wrapper">
+			<div class="prepare-words__modal__upper">
 				<div>
-					<h3 :style="{'margin': '0'}">Words to archive</h3>
+					<h4 class="prepare-words__modal__upper__header">Words to archive</h4>
 				</div>
 				<button
 				    @click="closeModal(blockClose)"
-				    class="prepare-words__close"
-				>Close</button>
+				    class="prepare-words__modal__upper__close"
+				>
+					Close
+					</button>
 			</div>
-			<div class="prepare-words__code">
+			<div class="prepare-words__modal__code">
 				<code v-html="toHtmlCsv" />
 			</div>
-			<div class="cta-wrapper">
+			<div class="prepare-words__modal__cta">
 				<button
 				    :disabled="loading"
-				    :class="{'prepare-words__cta':true,'prepare-words__cta--loading': loading}"
+				    :class="{'prepare-words__modal__cta__button':true,'prepare-words__modal__cta__button--loading': loading}"
 				    @click="copyAndArchive"
 				>Copy and archive</button>
 			</div>
@@ -101,58 +103,61 @@ export default {
 
 <style lang="scss">
 @import "../base.scss";
-.blur {
-	@include whole-screen;
-	@include overlay-bg;
-	@include absolute;
-}
-.close-wrapper {
-	@include space-between($ai: center);
-	margin-bottom: 1rem;
-}
-
-.cta-wrapper {
-	@include to-right;
-	margin-top: 1.5rem;
-}
-
 .prepare-words {
-	@include shadow;
-	@include stretch-width($w: 50rem);
-	@include absolute($left: calc(50% - 25rem));
-	margin-top: 1.5rem;
-	padding: 1rem;
-	background: $almost-white;
-	border: 4px solid $background;
-	z-index: 4;
-	&__close {
-		display: block;
-		margin-right: 1rem;
-		height: 1rem;
-		font-weight: 600;
-		color: $blue;
-		letter-spacing: 1px;
+	&__container {
+		@include whole-screen;
+		@include overlay-bg;
+		@include absolute;
 	}
-	&__code {
-		@include full-light-border;
+	&__modal {
+		@include shadow;
+		@include stretch-width($w: 50rem);
+		@include absolute($left: calc(50% - 25rem));
+		margin-top: 1.5rem;
 		padding: 1rem;
-	}
-	&__cta {
-		@include btn-cta($bc: $blue, $fc: $almost-white);
-		margin-right: 0;
-		height: 1.5rem;
-		font-size: 12px;
-		font-weight: 600;
-		border-radius: 3px;
-		&--loading {
-			@include strong-shadow;
-			opacity: 0.5;
-			&:hover {
-				cursor: auto;
+		background: $almost-white;
+		border: 4px solid $background;
+		z-index: 4;
+		&__upper {
+			@include space-between($ai: center);
+			margin-bottom: 1rem;
+			&__header {
+				margin: 0;
+			}
+			&__close {
+				display: block;
+				margin-right: 1rem;
+				height: 1rem;
+				font-weight: 600;
+				color: $blue;
+				letter-spacing: 1px;
 			}
 		}
-		&:focus {
-			@include shadow;
+		&__code {
+			@include full-light-border;
+			padding: 1rem;
+		}
+		&__cta {
+			@include to-right;
+			margin-top: 1.5rem;
+			&__button {
+				@include btn-cta($bc: $blue, $fc: $almost-white);
+				margin-right: 0;
+				height: 1.5rem;
+				font-size: 12px;
+				font-weight: 600;
+				border-radius: 3px;
+				&--loading {
+					@include strong-shadow;
+					opacity: 0.5;
+					&:hover {
+						cursor: auto;
+					}
+				}
+				&:focus {
+					@include shadow;
+				}
+			}
 		}
 	}
 }
