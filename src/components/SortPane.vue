@@ -16,12 +16,12 @@
 					    value="default"
 					>
 						-- --
-						</option>
-						<option value="a-asc">A - Z</option>
-						<option value="a-desc">Z - A</option>
-						<option value="t-min">Min translations</option>
-						<option value="t-max">Max translations</option>
-						</select>
+					</option>
+					<option value="a-asc">A - Z</option>
+					<option value="a-desc">Z - A</option>
+					<option value="t-min">Min translations</option>
+					<option value="t-max">Max translations</option>
+				</select>
 			</div>
 			<div class="sort-pane__checkbox-wrapper">
 				<input
@@ -36,7 +36,7 @@
 				    for="noTranslationOnlyValue"
 				>
 					no translation only
-					</label>
+				</label>
 			</div>
 		</div>
 		<button
@@ -44,8 +44,8 @@
 		    @click="showModal"
 		>
 			PREPARE
-			</button>
-			</div>
+		</button>
+	</div>
 </template>
 
 <script>
