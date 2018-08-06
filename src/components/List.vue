@@ -23,22 +23,20 @@
 				    :resource="word"
 				    :refresh="refresh"
 				/>
-				</li>
-				</ul>
-				<div
-				    v-else
-				    class="no-results"
-				>
-					No active words...
-					</div>
-					</div>
-
+			</li>
+		</ul>
+		<div
+		    v-else
+		    class="no-results"
+		>
+			No active words...
+		</div>
+	</div>
 </template>
 
 <script>
 import Word from "./Word";
 import SortPane from "./SortPane";
-
 export default {
 	name: "List",
 	props: ["loading", "data", "refresh", "showModal"],
@@ -97,11 +95,9 @@ export default {
 	min-height: 6rem;
 	background: $almost-white;
 }
-
 .view-list {
 	padding: 1rem;
 }
-
 .no-results {
 	@include descriptive-text;
 	margin: calc(1rem - 2px) 1rem;
