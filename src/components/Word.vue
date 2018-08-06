@@ -258,9 +258,7 @@ export default {
 	&__upper {
 		@include space-between($ai: baseline);
 		&__container {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
+			@include space-between($ai: center);
 		}
 		&__expand {
 			margin: 7px 1rem 0 0;
@@ -280,9 +278,9 @@ export default {
 	}
 	&__input {
 		@include size($h: 1.75rem, $w: 20rem);
+		@include full-light-border;
 		margin: 1rem 1rem 0 1rem;
 		padding-left: 0.5rem;
-		border: 1px solid #eee;
 		border-left: 2px solid #eee;
 		border-radius: 2px;
 		&--changed {
