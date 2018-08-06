@@ -2,7 +2,7 @@
 	<div v-if="!loading" class="app-container">
 		<SortPane :shouldDisplay="!!data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal" />
 		<ul v-if="data.length" class="view-list">
-			<transition-group appear appear-class="fade-enter" appear-active-class="fade-enter-active">
+			<transition-group appear appear-class="grow-enter" appear-active-class="grow-enter-active">
 				<li v-for="word in sortedData" :key="word._id">
 					<Word :resource="word" :refresh="refresh" />
 				</li>
@@ -99,12 +99,12 @@ export default {
 	margin: calc(1rem - 2px) 1rem;
 }
 
-.fade-enter {
+.grow-enter {
 	opacity: 0;
 	transform: scale(0.9);
 }
 
-.fade-enter-active {
+.grow-enter-active {
 	transition: all 1s;
 }
 </style>
