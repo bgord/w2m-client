@@ -103,8 +103,8 @@ export default {
 @import "../base.scss";
 .blur {
 	@include whole-screen;
+	@include overlay-bg;
 	position: absolute;
-	background: rgba(0, 0, 0, 0.75);
 }
 .close-wrapper {
 	@include space-between($ai: center);

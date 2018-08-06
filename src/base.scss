@@ -1,6 +1,7 @@
 $background: #dfffd6;
 $blurred-background: #f0feed;
 $almost-white: #fcfefb;
+$overlay-bg: rgba(0, 0, 0, 0.75);
 @mixin shadow() {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
@@ -100,6 +101,10 @@ $almost-white: #fcfefb;
 @mixin whole-screen() {
     width: 100%;
     height: 100%;
+}
+
+@mixin overlay-bg {
+    background: $overlay-bg;
 }
 
 html,
