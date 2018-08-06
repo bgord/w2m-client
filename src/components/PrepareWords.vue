@@ -84,6 +84,8 @@ export default {
 					)
 				);
 				this.success = true;
+				alert("Copied and archived!");
+				this.closeModal();
 			} catch (e) {
 				this.success = false;
 				alert("Error while archiving.");
