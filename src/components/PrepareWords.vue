@@ -140,7 +140,7 @@ export default {
 		letter-spacing: 1px;
 	}
 	&__code {
-		@include light-border;
+		@include full-light-border;
 		padding: 1rem;
 	}
 	&__cta {

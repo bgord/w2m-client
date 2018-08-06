@@ -90,7 +90,7 @@ export default {
 <style lang="scss">
 @import "../base.scss";
 .app-container {
-	@include light-border;
+	@include full-light-border;
 	@include shadow;
 	margin: 2rem auto;
 	max-width: 45rem;
