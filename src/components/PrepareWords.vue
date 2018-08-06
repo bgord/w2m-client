@@ -132,7 +132,7 @@ export default {
 		margin-right: 1rem;
 		height: 1rem;
 		font-weight: 600;
-		color: #4286f4;
+		color: $blue;
 		letter-spacing: 1px;
 	}
 	&__code {
@@ -140,7 +140,7 @@ export default {
 		padding: 1rem;
 	}
 	&__cta {
-		@include btn-cta($bc: #4286f4, $fc: $almost-white);
+		@include btn-cta($bc: $blue, $fc: $almost-white);
 		margin-right: 0;
 		height: 1.5rem;
 		font-size: 12px;

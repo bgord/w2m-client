@@ -282,7 +282,7 @@ export default {
 		@include btn-reset;
 		margin: 7px 1rem 0 0;
 		height: 1rem;
-		color: #4286f4;
+		color: $blue;
 		letter-spacing: 1px;
 		font-weight: 600;
 	}
@@ -300,12 +300,12 @@ export default {
 	border-left: 2px solid #eee;
 	border-radius: 2px;
 	&--changed {
-		border-left: 2px solid #4286f4;
+		border-left: 2px solid $blue;
 	}
 }
 
 .btnek {
-	@include btn-cta($bc: #4286f4, $fc: $almost-white);
+	@include btn-cta($bc: $blue, $fc: $almost-white);
 	margin-left: 0;
 	height: 1.5rem;
 	font-size: 12px;
