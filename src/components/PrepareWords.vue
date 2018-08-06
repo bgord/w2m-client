@@ -21,7 +21,7 @@
 import axios from "axios";
 export default {
 	name: "PrepareWords",
-	props: ["data", "closeModal"],
+	props: ["data", "closeModal", "refresh"],
 	data() {
 		return {
 			loading: false,
@@ -80,6 +80,9 @@ export default {
 	},
 	mounted() {
 		this.$refs.modal.focus();
+	},
+	async beforeDestroy() {
+		if (this.success) await this.refresh();
 	},
 };
 </script>
