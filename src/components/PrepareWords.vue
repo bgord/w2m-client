@@ -102,9 +102,8 @@ export default {
 <style lang="scss">
 @import "../base.scss";
 .blur {
+	@include whole-screen;
 	position: absolute;
-	width: 100%;
-	height: 100%;
 	background: rgba(0, 0, 0, 0.75);
 }
 .close-wrapper {
