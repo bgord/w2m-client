@@ -1,34 +1,12 @@
 <template>
-	<div
-	    v-if="!loading"
-	    class="app-container"
-	>
-		<SortPane
-		    :shouldDisplay="!!data.length"
-		    :updateSortHashValue="updateSortHashValue"
-		    :sortHashValue="sortHashValue"
-		    :noTranslationOnlyValue="noTranslationOnlyValue"
-		    :updateNoTranslationOnly="updateNoTranslationOnly"
-		    :showModal="showModal"
-		/>
-		<ul
-		    v-if="data.length"
-		    class="view-list"
-		>
-			<li
-			    v-for="word in sortedData"
-			    :key="word._id"
-			>
-				<Word
-				    :resource="word"
-				    :refresh="refresh"
-				/>
+	<div v-if="!loading" class="app-container">
+		<SortPane :shouldDisplay="!!data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal" />
+		<ul v-if="data.length" class="view-list">
+			<li v-for="word in sortedData" :key="word._id">
+				<Word :resource="word" :refresh="refresh" />
 			</li>
 		</ul>
-		<div
-		    v-else
-		    class="no-results"
-		>
+		<div v-else class="no-results">
 			No active words...
 		</div>
 	</div>
@@ -37,19 +15,25 @@
 <script>
 import Word from "./Word";
 import SortPane from "./SortPane";
+import requiredify from "requiredify";
+console.log({ requiredify });
 export default {
 	name: "List",
-	props: {
-		loading: { type: Boolean, required: true },
-		data: {
-			type: Array,
-			default: function() {
-				return [];
-			},
+	props: requiredify(
+		{
+			loading: Boolean,
+			refresh: Function,
+			showModal: Function,
 		},
-		refresh: { type: Function, required: true },
-		showModal: { type: Function, required: true },
-	},
+		{
+			data: {
+				type: Array,
+				default: function() {
+					return [];
+				},
+			},
+		}
+	),
 	data() {
 		return {
 			sortHashValue: "default",

@@ -1,19 +1,14 @@
 <template>
-	<div
-	    class="spinner"
-	    :style="showSpinner"
-	/>
+	<div class="spinner" :style="showSpinner" />
 </template>
 
 <script>
+import requiredify from "requiredify";
 export default {
 	name: "Spinner",
-	props:{
-		loading: {
-			type: Boolean,
-			required: true,
-		},
-	},
+	props: requiredify({
+		loading: Boolean,
+	}),
 	computed: {
 		showSpinner: function() {
 			return { display: this.loading ? "block" : "none" };

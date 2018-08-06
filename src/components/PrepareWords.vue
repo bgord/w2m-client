@@ -1,19 +1,11 @@
 <template>
 	<div class="prepare-words__container">
-		<div
-		    class="prepare-words__modal"
-		    @keydown.esc="closeModal(blockClose)"
-		    ref="modal"
-		    tabindex="-1"
-		>
+		<div class="prepare-words__modal" @keydown.esc="closeModal(blockClose)" ref="modal" tabindex="-1">
 			<div class="prepare-words__modal__upper">
 				<div>
 					<h4 class="prepare-words__modal__upper__header">Words to archive</h4>
 				</div>
-				<button
-				    @click="closeModal(blockClose)"
-				    class="prepare-words__modal__upper__close"
-				>
+				<button @click="closeModal(blockClose)" class="prepare-words__modal__upper__close">
 					Close
 				</button>
 			</div>
@@ -21,11 +13,7 @@
 				<code v-html="toHtmlCsv" />
 			</div>
 			<div class="prepare-words__modal__cta">
-				<button
-				    :disabled="loading"
-				    :class="{'prepare-words__modal__cta__button':true,'prepare-words__modal__cta__button--loading': loading}"
-				    @click="copyAndArchive"
-				>
+				<button :disabled="loading" :class="{'prepare-words__modal__cta__button':true,'prepare-words__modal__cta__button--loading': loading}" @click="copyAndArchive">
 					Copy and archive
 				</button>
 			</div>
@@ -35,25 +23,19 @@
 
 <script>
 import axios from "axios";
+import requiredify from "requiredify";
 export default {
 	name: "PrepareWords",
-	props: {
+	props: requiredify({
 		data: {
 			type: Array,
-			required: true,
 			default: function() {
 				return [];
 			},
 		},
-		closeModal: {
-			type: Function,
-			required: true,
-		},
-		refresh: {
-			type: Function,
-			required:true,
-		},
-	},
+		closeModal: Function,
+		refresh: Function,
+	}),
 	data() {
 		return {
 			loading: false,

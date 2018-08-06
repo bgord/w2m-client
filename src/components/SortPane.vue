@@ -1,20 +1,10 @@
 <template>
-	<div
-	    v-if="shouldDisplay"
-	    class="sort-pane"
-	>
+	<div v-if="shouldDisplay" class="sort-pane">
 		<div class="sort-pane__content">
 			<div>
 				<span class="sort-pane__sortby">SORT BY:</span>
-				<select
-				    class="sort-pane__select"
-				    :value="sortHashValue"
-				    @change="updateSortHashValue"
-				>
-					<option
-					    selected
-					    value="default"
-					>
+				<select class="sort-pane__select" :value="sortHashValue" @change="updateSortHashValue">
+					<option selected value="default">
 						-- --
 					</option>
 					<option value="a-asc">A - Z</option>
@@ -24,41 +14,30 @@
 				</select>
 			</div>
 			<div class="sort-pane__checkbox-wrapper">
-				<input
-				    class="sort-pane__checkbox"
-				    type="checkbox"
-				    id="noTranslationOnlyValue"
-				    :checked="noTranslationOnlyValue"
-				    @change="updateNoTranslationOnly"
-				/>
-				<label
-				    class="sort-pane__label"
-				    for="noTranslationOnlyValue"
-				>
+				<input class="sort-pane__checkbox" type="checkbox" id="noTranslationOnlyValue" :checked="noTranslationOnlyValue" @change="updateNoTranslationOnly" />
+				<label class="sort-pane__label" for="noTranslationOnlyValue">
 					no translation only
 				</label>
 			</div>
 		</div>
-		<button
-		    class="sort-pane__cta"
-		    @click="showModal"
-		>
+		<button class="sort-pane__cta" @click="showModal">
 			PREPARE
 		</button>
 	</div>
 </template>
 
 <script>
+import requiredify from "requiredify";
 export default {
 	name: "SortPane",
-	props: {
-		shouldDisplay: { type: Boolean, required: true },
-		sortHashValue: { type: String, required: true },
-		updateSortHashValue: { type: Function, required: true },
-		updateNoTranslationOnly: { type: Function, required: true },
-		noTranslationOnlyValue: { type: Boolean, required: true },
-		showModal: { type: Function, required: true },
-	},
+	props: requiredify({
+		shouldDisplay: Boolean,
+		sortHashValue: String,
+		updateSortHashValue: Function,
+		updateNoTranslationOnly: Function,
+		noTranslationOnlyValue: Boolean,
+		showModal: Function,
+	}),
 };
 </script>
 
