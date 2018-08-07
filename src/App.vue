@@ -1,24 +1,12 @@
 <template>
 	<div class="wrapper">
-		<Nav />
-		<PrepareWords
-		    v-if="showPrepareWordsModal"
-		    :closeModal="closeModal"
-		    :data="data"
-		    :refresh="fetchWords"
-		/>
+		<PrepareWords v-if="showPrepareWordsModal" :closeModal="closeModal" :data="data" :refresh="fetchWords" />
 		<Spinner :loading=" loading " />
-		<List
-		    :loading="loading "
-		    :data="data "
-		    :refresh="fetchWords "
-		    :showModal="showModal "
-		/>
+		<List :loading="loading " :data="data " :refresh="fetchWords " :showModal="showModal " />
 	</div>
 </template>
 
 <script>
-import Nav from "./components/Nav";
 import Spinner from "./components/Spinner";
 import List from "./components/List";
 import PrepareWords from "./components/PrepareWords";
@@ -58,6 +46,6 @@ export default {
 	async created() {
 		await this.fetchWords();
 	},
-	components: { Nav, Spinner, List, PrepareWords },
+	components: { Spinner, List, PrepareWords },
 };
 </script>
