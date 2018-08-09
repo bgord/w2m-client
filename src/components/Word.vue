@@ -47,6 +47,7 @@
 			<div>
 				<div :class="{ 'view-item__lower__word-badge ':true, 'view-item__lower__word-badge--blurred': !resource.downloadResult}">{{ MP3Msg }}</div>
 				<div :class="{ 'view-item__lower__word-badge ':true, 'view-item__lower__word-badge--blurred': !resource.suggestedTranslations.length}">{{suggestionsMsg}}</div>
+				<div :class="{ 'view-item__lower__word-badge ':true, 'view-item__lower__word-badge--blurred': !resource.suggestedContexts.length}">{{contextsMsg}}</div>
 			</div>
 			<div class="view-item__lower__buttons-wrapper">
 				<button v-if="!collapsed" @click="resetWord" class="view-item__lower__reset">
@@ -183,12 +184,22 @@ export default {
 		suggestionsMsg: function() {
 			const arr = this.resource.suggestedTranslations;
 			if (!arr.length) {
-				return "NO SUGGESTED TRANSLATIONS";
+				return "NO TRANSLATIONS";
 			}
 			if (arr.length === 1) {
-				return "SUGGESTED TRANSLATION";
+				return "TRANSLATION";
 			}
-			return "SUGGESTED TRANSLATIONS";
+			return "TRANSLATIONS";
+		},
+		contextsMsg: function() {
+			const arr = this.resource.suggestedContexts;
+			if (!arr.length) {
+				return "NO CONTEXTS";
+			}
+			if (arr.length === 1) {
+				return "CONTEXT";
+			}
+			return "CONTEXTS";
 		},
 		hideExpandText() {
 			return this.collapsed ? "EXPAND" : "HIDE";
