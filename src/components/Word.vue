@@ -25,11 +25,19 @@
 						SAVE TRANSLATION
 					</button>
 				</form>
-				<div v-if="resource.suggestedTranslations.length" class="view-item__sugg-trans__text">
+				<div v-if="resource.suggestedContexts.length" class="view-item__sugg-items__text">
+					Suggested contexts:
+				</div>
+				<ul v-if="resource.suggestedContexts.length" class="view-item__sugg-items__list">
+					<li v-for="(context, index) in resource.suggestedContexts" :key="index" @click="chooseContext(context)" class="view-item__sugg-items__item">
+						{{ context }}
+					</li>
+				</ul>
+				<div v-if="resource.suggestedTranslations.length" class="view-item__sugg-items__text">
 					Suggested translations:
 				</div>
-				<ul v-if="resource.suggestedTranslations.length" class="view-item__sugg-trans__list">
-					<li v-for="(suggestion, index) in resource.suggestedTranslations" :key="index" @click="chooseSugestion(suggestion)" class="view-item__sugg-trans__item">
+				<ul v-if="resource.suggestedTranslations.length" class="view-item__sugg-items__list">
+					<li v-for="(suggestion, index) in resource.suggestedTranslations" :key="index" @click="chooseSugestion(suggestion)" class="view-item__sugg-items__item">
 						{{ suggestion }}
 					</li>
 				</ul>
@@ -155,6 +163,10 @@ export default {
 			this.translation += suggestion;
 			this.$refs.translation.focus();
 		},
+		chooseContext(context) {
+			this.context = context;
+			this.$refs.context.focus();
+		},
 	},
 	computed: {
 		highlightWordInContext() {
@@ -260,7 +272,7 @@ export default {
 			@include bta-cta-loading;
 		}
 	}
-	&__sugg-trans {
+	&__sugg-items {
 		&__text {
 			@include descriptive-text;
 			margin-left: 5px;
