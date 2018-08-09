@@ -27,14 +27,14 @@ import requiredify from "requiredify";
 export default {
 	name: "PrepareWords",
 	props: requiredify({
+		refresh: Function,
+		closeModal: Function,
 		data: {
 			type: Array,
 			default() {
 				return [];
 			},
 		},
-		closeModal: Function,
-		refresh: Function,
 	}),
 	data() {
 		return {

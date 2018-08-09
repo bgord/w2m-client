@@ -1,6 +1,6 @@
 <template>
 	<div v-if="!loading" class="app-container">
-		<SortPane :shouldDisplay="!!data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal" :howManyTranslatedWords="howManyTranslatedWords" :howManyWords="howManyWords"/>
+		<SortPane :shouldDisplay="!!data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal" :howManyTranslatedWords="howManyTranslatedWords" :howManyWords="howManyWords" />
 		<ul v-if="data.length" class="view-list">
 			<transition-group name="grow" appear appear-class="grow-enter" appear-active-class="grow-enter-active">
 				<li v-for="word in sortedData" :key="word._id">
@@ -21,21 +21,19 @@ import requiredify from "requiredify";
 
 export default {
 	name: "List",
-	props: requiredify(
-		{
+	props: {
+		...requiredify({
 			loading: Boolean,
 			refresh: Function,
 			showModal: Function,
-		},
-		{
-			data: {
-				type: Array,
-				default: function() {
-					return [];
-				},
+		}),
+		data: {
+			type: Array,
+			default() {
+				return [];
 			},
-		}
-	),
+		},
+	},
 	data() {
 		return {
 			sortHashValue: "default",
@@ -81,7 +79,7 @@ export default {
 		},
 		howManyTranslatedWords() {
 			return this.data.filter(word => word.translation).length;
-		}
+		},
 	},
 	components: { Word, SortPane },
 };
