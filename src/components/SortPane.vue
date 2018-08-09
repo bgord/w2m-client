@@ -16,7 +16,7 @@
 			<div class="sort-pane__checkbox-wrapper">
 				<input class="sort-pane__checkbox" type="checkbox" id="noTranslationOnlyValue" :checked="noTranslationOnlyValue" @change="updateNoTranslationOnly" />
 				<label class="sort-pane__label" for="noTranslationOnlyValue">
-					no translation only
+					no translation only ({{ howManyTranslatedWords }}/{{ howManyWords }}) 
 				</label>
 			</div>
 		</div>
@@ -37,6 +37,8 @@ export default {
 		updateNoTranslationOnly: Function,
 		noTranslationOnlyValue: Boolean,
 		showModal: Function,
+		howManyTranslatedWords:Number,
+		howManyWords: Number
 	}),
 };
 </script>

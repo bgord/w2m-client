@@ -1,6 +1,6 @@
 <template>
 	<div v-if="!loading" class="app-container">
-		<SortPane :shouldDisplay="!!data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal" />
+		<SortPane :shouldDisplay="!!data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal" :howManyTranslatedWords="howManyTranslatedWords" :howManyWords="howManyWords"/>
 		<ul v-if="data.length" class="view-list">
 			<transition-group name="grow" appear appear-class="grow-enter" appear-active-class="grow-enter-active">
 				<li v-for="word in sortedData" :key="word._id">
@@ -76,6 +76,12 @@ export default {
 				: () => true;
 			return this.data.filter(filter).sort(sorters[this.sortHashValue]);
 		},
+		howManyWords() {
+			return this.data.length;
+		},
+		howManyTranslatedWords() {
+			return this.data.filter(word => word.translation).length;
+		}
 	},
 	components: { Word, SortPane },
 };
