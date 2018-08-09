@@ -44,10 +44,10 @@ export default {
 		};
 	},
 	methods: {
-		updateSortHashValue: function(e) {
+		updateSortHashValue(e) {
 			this.sortHashValue = e.target.value;
 		},
-		updateNoTranslationOnly: function(e) {
+		updateNoTranslationOnly(e) {
 			this.noTranslationOnlyValue = e.target.checked;
 		},
 	},

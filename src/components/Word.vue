@@ -181,7 +181,7 @@ export default {
 		MP3Msg() {
 			return this.resource.downloadResult ? "MP3" : "NO MP3";
 		},
-		suggestionsMsg: function() {
+		suggestionsMsg() {
 			const arr = this.resource.suggestedTranslations;
 			if (!arr.length) {
 				return "NO TRANSLATIONS";
@@ -191,7 +191,7 @@ export default {
 			}
 			return "TRANSLATIONS";
 		},
-		contextsMsg: function() {
+		contextsMsg() {
 			const arr = this.resource.suggestedContexts;
 			if (!arr.length) {
 				return "NO CONTEXTS";
@@ -212,7 +212,7 @@ export default {
 		},
 	},
 	filters: {
-		withParenthesis: function(translation) {
+		withParenthesis(translation) {
 			if (translation) {
 				return `(${translation})`;
 			}

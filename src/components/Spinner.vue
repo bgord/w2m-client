@@ -10,7 +10,7 @@ export default {
 		loading: Boolean,
 	}),
 	computed: {
-		showSpinner: function() {
+		showSpinner() {
 			return { display: this.loading ? "block" : "none" };
 		},
 	},

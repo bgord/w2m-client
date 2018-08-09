@@ -29,7 +29,7 @@ export default {
 	props: requiredify({
 		data: {
 			type: Array,
-			default: function() {
+			default() {
 				return [];
 			},
 		},
