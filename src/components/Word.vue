@@ -223,12 +223,11 @@ export default {
 .view-item {
 	&__container {
 		@include normal;
-		margin-bottom: 1.5rem;
+		margin-bottom: 0.5rem;
 		padding-bottom: 0.5rem;
 		min-height: 3.5rem;
-		background: #fafafa;
-		border-left: 3px solid $background;
-		border-right: 3px solid $background;
+		background: #f6f6f6;
+		border-left: 2px solid $background;
 		&--uncollapsed {
 			@include light-shadow;
 		}
