@@ -5,11 +5,17 @@
 				<span class="view-item__upper__context" v-html="highlightWordInContext" />
 				<span class="view-item__upper__translation">{{ translation | withParenthesis }}</span>
 			</div>
-			<transition name="switch" mode="out-in">
+			<div>
+				<button v-if="!collapsed" @click="deleteWord" class="view-item__lower__delete">
+					DELETE
+				</button>
+				<button v-if="!collapsed" @click="resetWord" class="view-item__lower__reset">
+					RESET
+				</button>
 				<button @click="toggleCollapse" class="view-item__upper__expand" :key="hideExpandText">
 					{{hideExpandText}}
 				</button>
-			</transition>
+			</div>
 		</div>
 		<transition name="appear-left" mode="out-in">
 			<div v-if=" !collapsed ">
@@ -48,14 +54,6 @@
 				<div :class="{ 'view-item__lower__word-badge ':true, 'view-item__lower__word-badge--blurred': !resource.downloadResult}">{{ MP3Msg }}</div>
 				<div :class="{ 'view-item__lower__word-badge ':true, 'view-item__lower__word-badge--blurred': !resource.suggestedTranslations.length}">{{suggestionsMsg}}</div>
 				<div :class="{ 'view-item__lower__word-badge ':true, 'view-item__lower__word-badge--blurred': !resource.suggestedContexts.length}">{{contextsMsg}}</div>
-			</div>
-			<div class="view-item__lower__buttons-wrapper">
-				<button v-if="!collapsed" @click="resetWord" class="view-item__lower__reset">
-					RESET
-				</button>
-				<button v-if="!collapsed" @click="deleteWord" class="view-item__lower__delete">
-					DELETE
-				</button>
 			</div>
 		</div>
 	</div>
@@ -327,14 +325,6 @@ export default {
 			margin: 1px 1rem 0 0;
 		}
 	}
-}
-.switch-enter-active,
-.switch-leave-active {
-	transition: all 0.15s;
-}
-.switch-enter,
-.switch-leave-to {
-	transform: scale(0.8);
 }
 
 .appear-left-enter-active,
