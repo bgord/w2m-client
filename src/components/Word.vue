@@ -291,6 +291,7 @@ export default {
 		}
 		&__item {
 			@include descriptive-text($c: #555);
+			padding-bottom:.5rem;
 			&:hover {
 				cursor: pointer;
 				opacity: 0.85;
