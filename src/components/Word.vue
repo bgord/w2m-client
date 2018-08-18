@@ -20,13 +20,13 @@
 		<transition name="appear-left" mode="out-in">
 			<div v-if=" !collapsed ">
 				<form @submit.prevent="editContext">
-					<input v-model="context" :class="{ 'view-item__input':true, 'view-item__input--changed':hasContextChanged}" ref="context" @keyup.esc="context=''" />
+					<input v-model="context" :class="{ 'view-item__input':true, 'view-item__input--changed':hasContextChanged}" @keyup.esc="context=''" />
 					<button :disabled="editContextPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editContextPending}" type="submit">
 						SAVE CONTEXT
 					</button>
 				</form>
 				<form @submit.prevent="editTranslation">
-					<input v-model="translation" :class="{ 'view-item__input ':true, 'view-item__input--changed ':hasTranslationChanged}" ref="translation" @keyup.esc="translation=''" />
+					<input v-model="translation" :class="{ 'view-item__input ':true, 'view-item__input--changed ':hasTranslationChanged}" @keyup.esc="translation=''" />
 					<button :disabled="editTranslationPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editTranslationPending}" type="submit">
 						SAVE TRANSLATION
 					</button>
@@ -66,7 +66,6 @@ export default {
 	name: "Word",
 	data() {
 		return {
-			shouldFocusTrans: false,
 			editContextPending: false,
 			editTranslationPending: false,
 			collapsed: true,
@@ -81,9 +80,6 @@ export default {
 	}),
 	methods: {
 		toggleCollapse() {
-			if (!this.collapsed) {
-				this.shouldFocusTrans = false;
-			}
 			this.collapsed = !this.collapsed;
 		},
 		async editContext() {
@@ -91,7 +87,6 @@ export default {
 				return;
 			}
 			this.shouldFocusTrans = false;
-			this.$refs.context.focus();
 			if (this.resource.context === this.context) {
 				alert("Context hasn't changed.");
 				return;
@@ -116,7 +111,6 @@ export default {
 			if (this.editTranslationPending) {
 				return;
 			}
-			this.$refs.translation.focus();
 			if (this.resource.translation === this.translation) {
 				alert("Translation hasn't changed.");
 				return;
@@ -156,15 +150,12 @@ export default {
 		resetWord() {
 			this.translation = this.resource.translation || "";
 			this.context = this.resource.context;
-			this.$refs.context.focus();
 		},
 		chooseSugestion(suggestion) {
 			this.translation += suggestion;
-			this.$refs.translation.focus();
 		},
 		chooseContext(context) {
 			this.context = context;
-			this.$refs.context.focus();
 		},
 	},
 	computed: {
@@ -216,13 +207,6 @@ export default {
 			}
 			return "";
 		},
-	},
-	updated() {
-		if (!this.collapsed && !this.shouldFocusTrans) {
-			this.$refs.context.focus();
-			this.shouldFocusTrans = true;
-			return;
-		}
 	},
 };
 </script>
