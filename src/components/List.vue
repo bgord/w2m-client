@@ -1,7 +1,7 @@
 <template>
 	<div v-if="!loading" class="app-container">
 		<SortPane :shouldDisplay="!!data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal" :howManyNotTranslatedWords="howManyNotTranslatedWords" :howManyWords="howManyWords" />
-		<ul v-if="data.length" class="view-list">
+		<ul v-if="data.length" class="view-list" @keyup.up="moveFocus(-1)" @keyup.down="moveFocus(1)" ref="list" tabindex="-1">
 			<transition-group name="grow" appear appear-class="grow-enter" appear-active-class="grow-enter-active">
 				<li v-for="(word, index) in sortedData" :key="word._id">
 					<Word :resource="word" :refresh="refresh" :wordIndex="index" :currentHighlightedIndex="currentHighlightedIndex" :toggleCollapse="toggleCollapse" />
@@ -56,6 +56,18 @@ export default {
 			}
 			this.currentHighlightedIndex = wordIndex;
 		},
+		moveFocus(dir) {
+			if (this.currentHighlightedIndex === -1 && dir === -1) {
+				return;
+			}
+			if (
+				this.currentHighlightedIndex === this.howManyWords - 1 &&
+				dir === 1
+			) {
+				return;
+			}
+			this.currentHighlightedIndex += dir;
+		},
 	},
 	computed: {
 		sortedData() {
@@ -88,6 +100,9 @@ export default {
 		howManyNotTranslatedWords() {
 			return this.data.filter(word => !word.translation).length;
 		},
+	},
+	mounted() {
+		setTimeout(() => this.$refs.list.focus(), 1000);
 	},
 	components: { Word, SortPane },
 };
