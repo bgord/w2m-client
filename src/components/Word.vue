@@ -19,13 +19,13 @@
 		</div>
 		<div v-if=" !collapsed ">
 			<form @submit.prevent="editContext">
-				<input v-model="context" :class="{ 'view-item__input':true, 'view-item__input--changed':hasContextChanged}" @keyup.esc="context=''" ref="context" />
+				<input v-model="context" :class="{ 'view-item__input':true, 'view-item__input--changed':hasContextChanged}" @keyup.esc="resetContext" ref="context" />
 				<button :disabled="editContextPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editContextPending}" type="submit">
 					SAVE CONTEXT
 				</button>
 			</form>
 			<form @submit.prevent="editTranslation">
-				<input v-model="translation" :class="{ 'view-item__input ':true, 'view-item__input--changed ':hasTranslationChanged}" @keyup.esc="translation=''" />
+				<input v-model="translation" :class="{ 'view-item__input ':true, 'view-item__input--changed ':hasTranslationChanged}" @keyup.esc="resetTranslation" />
 				<button :disabled="editTranslationPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editTranslationPending}" type="submit">
 					SAVE TRANSLATION
 				</button>
@@ -147,8 +147,14 @@ export default {
 			}
 		},
 		resetWord() {
-			this.translation = this.resource.translation || "";
+			this.resetContext();
+			this.resetTranslation();
+		},
+		resetContext() {
 			this.context = this.resource.context;
+		},
+		resetTranslation() {
+			this.translation = this.resource.translation || "";
 		},
 		chooseSugestion(suggestion) {
 			this.translation += suggestion;
