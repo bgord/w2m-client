@@ -1,7 +1,7 @@
 <template>
 	<div v-if="!loading" class="app-container">
 		<SortPane :shouldDisplay="!!data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal" :howManyNotTranslatedWords="howManyNotTranslatedWords" :howManyWords="howManyWords" />
-		<ul v-if="data.length" class="view-list" @keyup.up="moveFocus(-1)" @keyup.down="moveFocus(1)" ref="list" tabindex="-1">
+		<ul v-if="data.length" class="view-list" @keypress.up="moveFocus(-1)" @keypress.down="moveFocus(1)" ref="list" tabindex="-1">
 			<transition-group name="grow" appear appear-class="grow-enter" appear-active-class="grow-enter-active">
 				<li v-for="(word, index) in sortedData" :key="word._id">
 					<Word :resource="word" :refresh="refresh" :wordIndex="index" :currentHighlightedIndex="currentHighlightedIndex" :toggleCollapse="toggleCollapse" :isCurrentWordDirty="isCurrentWordDirty" :setCurrentWordDirty="setCurrentWordDirty" />
@@ -61,6 +61,7 @@ export default {
 		moveFocus(dir) {
 			this.isCurrentWordDirty = false;
 			if (this.currentHighlightedIndex === -1 && dir === -1) {
+				this.$refs.list.focus();
 				return;
 			}
 			if (
