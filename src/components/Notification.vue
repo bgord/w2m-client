@@ -23,7 +23,7 @@ export default {
 <style lang="scss">
 @import "../base.scss";
 .notification {
-	@include fixed($top: 90%, $left: 85%);
+	@include fixed($bottom: 2rem, $right: 2rem);
 	padding: 0.25rem 1rem;
 	height: 2rem;
 	background: $green-bg;

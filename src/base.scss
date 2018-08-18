@@ -145,9 +145,11 @@ $green: #58aa40;
     left: $left;
 }
 
-@mixin fixed($top: auto, $left: auto) {
+@mixin fixed($top: auto, $left: auto, $right:auto, $bottom: auto) {
     position: fixed;
     top: $top;
+    right: $right;
+    bottom: $bottom;
     left: $left;
 }
 
