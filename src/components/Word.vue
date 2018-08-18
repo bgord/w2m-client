@@ -12,7 +12,7 @@
 				<button v-if="!collapsed" @click="resetWord" class="view-item__lower__reset">
 					RESET
 				</button>
-				<button @click="toggleCollapse" class="view-item__upper__expand" :key="hideExpandText">
+				<button @click="toggleCollapse(wordIndex)" class="view-item__upper__expand" :key="hideExpandText">
 					{{hideExpandText}}
 				</button>
 			</div>
@@ -68,7 +68,6 @@ export default {
 		return {
 			editContextPending: false,
 			editTranslationPending: false,
-			collapsed: true,
 			context: this.resource.context,
 			translation: this.resource.translation || "",
 			word: this.resource.word,
@@ -77,11 +76,11 @@ export default {
 	props: requiredify({
 		resource: Object,
 		refresh: Function,
+		wordIndex: Number,
+		currentHighlightedIndex: Number,
+		toggleCollapse: Function,
 	}),
 	methods: {
-		toggleCollapse() {
-			this.collapsed = !this.collapsed;
-		},
 		async editContext() {
 			if (this.editContextPending) {
 				return;
@@ -198,6 +197,9 @@ export default {
 		},
 		hasTranslationChanged() {
 			return (this.resource.translation || "") !== this.translation;
+		},
+		collapsed() {
+			return this.currentHighlightedIndex !== this.wordIndex;
 		},
 	},
 	filters: {

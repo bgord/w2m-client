@@ -3,8 +3,8 @@
 		<SortPane :shouldDisplay="!!data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal" :howManyNotTranslatedWords="howManyNotTranslatedWords" :howManyWords="howManyWords" />
 		<ul v-if="data.length" class="view-list">
 			<transition-group name="grow" appear appear-class="grow-enter" appear-active-class="grow-enter-active">
-				<li v-for="word in sortedData" :key="word._id">
-					<Word :resource="word" :refresh="refresh" />
+				<li v-for="(word, index) in sortedData" :key="word._id">
+					<Word :resource="word" :refresh="refresh" :wordIndex="index" :currentHighlightedIndex="currentHighlightedIndex" :toggleCollapse="toggleCollapse" />
 				</li>
 			</transition-group>
 		</ul>
@@ -39,6 +39,7 @@ export default {
 			sortHashValue: "default",
 			noTranslationOnlyValue: false,
 			sorter: () => {},
+			currentHighlightedIndex: -1,
 		};
 	},
 	methods: {
@@ -47,6 +48,13 @@ export default {
 		},
 		updateNoTranslationOnly(e) {
 			this.noTranslationOnlyValue = e.target.checked;
+		},
+		toggleCollapse(wordIndex) {
+			if (this.currentHighlightedIndex === wordIndex) {
+				this.currentHighlightedIndex = -1;
+				return;
+			}
+			this.currentHighlightedIndex = wordIndex;
 		},
 	},
 	computed: {
