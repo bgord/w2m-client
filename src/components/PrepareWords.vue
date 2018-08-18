@@ -110,12 +110,13 @@ export default {
 		@include whole-screen;
 		@include overlay-bg;
 		@include absolute;
+		margin-top: -2rem;
 	}
 	&__modal {
 		@include shadow;
 		@include stretch-width($w: 50rem);
 		@include absolute($left: calc(50% - 25rem));
-		margin-top: 1.5rem;
+		margin-top: 2rem;
 		padding: 1rem;
 		background: $almost-white;
 		border: 4px solid $background;
@@ -138,7 +139,7 @@ export default {
 		}
 		&__cta {
 			@include to-right;
-			margin-top: 1.5rem;
+			margin-top: 1rem;
 			&__button {
 				@include btn-cta($bc: $blue, $fc: $almost-white);
 				margin-right: 0;
