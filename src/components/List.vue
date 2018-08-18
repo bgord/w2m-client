@@ -120,7 +120,7 @@ export default {
 			return;
 		}
 		window.scrollTo({
-			top: this.currentHighlightedIndex * 72 + 42,
+			top: this.currentHighlightedIndex * 72 + 40,
 			behavior: "smooth",
 		});
 	},
