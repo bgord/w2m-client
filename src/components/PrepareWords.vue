@@ -113,18 +113,20 @@ export default {
 	&__container {
 		@include whole-screen;
 		@include overlay-bg;
-		@include absolute;
+		position: fixed;
 		margin-top: -2rem;
+		z-index: 4;
 	}
 	&__modal {
 		@include shadow;
 		@include stretch-width($w: 50rem);
-		@include absolute($left: calc(50% - 25rem));
+		position: fixed;
+		left: calc(50% - 25rem);
 		margin-top: 2rem;
 		padding: 1rem;
 		background: $almost-white;
 		border: 4px solid $background;
-		z-index: 4;
+		z-index: 5;
 		&__upper {
 			@include space-between($ai: center);
 			margin-bottom: 1rem;
