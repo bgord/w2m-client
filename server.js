@@ -5,6 +5,9 @@ const assert = require("assert");
 const cors = require("cors");
 
 const app = express();
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -70,7 +73,12 @@ const sleep = ms =>
 			}
 		});
 
-		app.listen(server_port, () =>
+		app.post("/word-added-notif", async (req, res) => {
+			const { word } = req.body;
+			io.emit("new-word", word);
+		});
+
+		server.listen(server_port, () =>
 			console.log(`Listening on port ${server_port}`)
 		);
 	} catch (e) {

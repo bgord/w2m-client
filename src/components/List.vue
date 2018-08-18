@@ -11,14 +11,16 @@
 		<div v-else class="no-results">
 			No active words...
 		</div>
+		<Notification :newlyAddedWord="newlyAddedWord" :clearNotification="clearNotification" />
 	</div>
 </template>
 
 <script>
 import Word from "./Word";
 import SortPane from "./SortPane";
+import Notification from "./Notification";
 import requiredify from "requiredify";
-
+import io from "socket.io-client";
 export default {
 	name: "List",
 	props: {
@@ -41,6 +43,8 @@ export default {
 			sorter: () => {},
 			currentHighlightedIndex: -1,
 			isCurrentWordDirty: false,
+			socket: io("localhost:8686"),
+			newlyAddedWord: "",
 		};
 	},
 	methods: {
@@ -74,6 +78,9 @@ export default {
 		},
 		setCurrentWordDirty() {
 			this.isCurrentWordDirty = true;
+		},
+		clearNotification() {
+			this.newlyAddedWord = "";
 		},
 	},
 	computed: {
@@ -109,6 +116,11 @@ export default {
 		},
 	},
 	mounted() {
+		this.socket.on("new-word", word => {
+			this.newlyAddedWord = word;
+			setTimeout(() => this.clearNotification(), 5000);
+			this.refresh();
+		});
 		setTimeout(() => this.$refs.list.focus(), 1000);
 	},
 	updated() {
@@ -124,7 +136,7 @@ export default {
 			behavior: "smooth",
 		});
 	},
-	components: { Word, SortPane },
+	components: { Word, SortPane, Notification },
 };
 </script>
 

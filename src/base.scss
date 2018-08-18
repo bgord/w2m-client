@@ -145,6 +145,12 @@ $green: #58aa40;
     left: $left;
 }
 
+@mixin fixed($top: auto, $left: auto) {
+    position: fixed;
+    top: $top;
+    left: $left;
+}
+
 @mixin size($h, $w) {
     height: $h;
     width: $w;

@@ -113,15 +113,14 @@ export default {
 	&__container {
 		@include whole-screen;
 		@include overlay-bg;
-		position: fixed;
+		@include fixed;
 		margin-top: -2rem;
 		z-index: 4;
 	}
 	&__modal {
 		@include shadow;
 		@include stretch-width($w: 50rem);
-		position: fixed;
-		left: calc(50% - 25rem);
+		@include fixed($left: calc(50% - 25rem));
 		margin-top: 2rem;
 		padding: 1rem;
 		background: $almost-white;
