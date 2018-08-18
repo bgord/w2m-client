@@ -3,7 +3,7 @@
 		<SortPane :shouldDisplay="!!data.length" :updateSortHashValue="updateSortHashValue" :sortHashValue="sortHashValue" :noTranslationOnlyValue="noTranslationOnlyValue" :updateNoTranslationOnly="updateNoTranslationOnly" :showModal="showModal" :howManyNotTranslatedWords="howManyNotTranslatedWords" :howManyWords="howManyWords" />
 		<ul v-if="data.length" class="view-list" @keypress.up="moveFocus(-1)" @keypress.down="moveFocus(1)" ref="list" tabindex="-1">
 			<transition-group name="grow" appear appear-class="grow-enter" appear-active-class="grow-enter-active">
-				<li v-for="(word, index) in sortedData" :key="word._id">
+				<li v-for="(word, index) in sortedData" :key="word._id" :data-index="index">
 					<Word :resource="word" :refresh="refresh" :wordIndex="index" :currentHighlightedIndex="currentHighlightedIndex" :toggleCollapse="toggleCollapse" :isCurrentWordDirty="isCurrentWordDirty" :setCurrentWordDirty="setCurrentWordDirty" />
 				</li>
 			</transition-group>
@@ -111,6 +111,19 @@ export default {
 	mounted() {
 		setTimeout(() => this.$refs.list.focus(), 1000);
 	},
+	updated() {
+		const curr_elem = document.querySelector(
+			`[data-index="${this.currentHighlightedIndex}"]`
+		);
+		if (!curr_elem) {
+			this.$refs.list.focus();
+			return;
+		}
+		window.scrollTo({
+			top: this.currentHighlightedIndex * 72 + 42,
+			behavior: "smooth",
+		});
+	},
 	components: { Word, SortPane },
 };
 </script>
@@ -124,6 +137,7 @@ export default {
 	margin: 2rem auto;
 	min-height: 6rem;
 	background: $almost-white;
+	margin-bottom: 10rem;
 }
 .view-list {
 	padding: 1rem;
