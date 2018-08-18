@@ -49,3 +49,9 @@ export default {
 	components: { Spinner, List, PrepareWords },
 };
 </script>
+
+<style lang="scss">
+.modal-open {
+	overflow: hidden;
+}
+</style>

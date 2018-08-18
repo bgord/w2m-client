@@ -96,9 +96,13 @@ export default {
 	},
 	mounted() {
 		this.$refs.modal.focus();
+		document.body.classList.toggle("modal-open");
 	},
 	async beforeDestroy() {
 		if (this.success) await this.refresh();
+	},
+	destroyed() {
+		document.body.classList.toggle("modal-open");
 	},
 };
 </script>
