@@ -4,7 +4,7 @@
 		<ul v-if="data.length" class="view-list" @keyup.up="moveFocus(-1)" @keyup.down="moveFocus(1)" ref="list" tabindex="-1">
 			<transition-group name="grow" appear appear-class="grow-enter" appear-active-class="grow-enter-active">
 				<li v-for="(word, index) in sortedData" :key="word._id">
-					<Word :resource="word" :refresh="refresh" :wordIndex="index" :currentHighlightedIndex="currentHighlightedIndex" :toggleCollapse="toggleCollapse" />
+					<Word :resource="word" :refresh="refresh" :wordIndex="index" :currentHighlightedIndex="currentHighlightedIndex" :toggleCollapse="toggleCollapse" :isCurrentWordDirty="isCurrentWordDirty" :setCurrentWordDirty="setCurrentWordDirty" />
 				</li>
 			</transition-group>
 		</ul>
@@ -40,6 +40,7 @@ export default {
 			noTranslationOnlyValue: false,
 			sorter: () => {},
 			currentHighlightedIndex: -1,
+			isCurrentWordDirty: false,
 		};
 	},
 	methods: {
@@ -50,6 +51,7 @@ export default {
 			this.noTranslationOnlyValue = e.target.checked;
 		},
 		toggleCollapse(wordIndex) {
+			this.isCurrentWordDirty = false;
 			if (this.currentHighlightedIndex === wordIndex) {
 				this.currentHighlightedIndex = -1;
 				return;
@@ -57,6 +59,7 @@ export default {
 			this.currentHighlightedIndex = wordIndex;
 		},
 		moveFocus(dir) {
+			this.isCurrentWordDirty = false;
 			if (this.currentHighlightedIndex === -1 && dir === -1) {
 				return;
 			}
@@ -67,6 +70,9 @@ export default {
 				return;
 			}
 			this.currentHighlightedIndex += dir;
+		},
+		setCurrentWordDirty() {
+			this.isCurrentWordDirty = true;
 		},
 	},
 	computed: {

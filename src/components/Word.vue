@@ -20,7 +20,7 @@
 		<transition name="appear-left" mode="out-in">
 			<div v-if=" !collapsed ">
 				<form @submit.prevent="editContext">
-					<input v-model="context" :class="{ 'view-item__input':true, 'view-item__input--changed':hasContextChanged}" @keyup.esc="context=''" />
+					<input v-model="context" :class="{ 'view-item__input':true, 'view-item__input--changed':hasContextChanged}" @keyup.esc="context=''" ref="context" />
 					<button :disabled="editContextPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editContextPending}" type="submit">
 						SAVE CONTEXT
 					</button>
@@ -79,6 +79,8 @@ export default {
 		wordIndex: Number,
 		currentHighlightedIndex: Number,
 		toggleCollapse: Function,
+		isCurrentWordDirty: Boolean,
+		setCurrentWordDirty: Function,
 	}),
 	methods: {
 		async editContext() {
@@ -209,6 +211,12 @@ export default {
 			}
 			return "";
 		},
+	},
+	updated() {
+		if (this.$refs.context && !this.isCurrentWordDirty) {
+			this.$refs.context.focus();
+			this.setCurrentWordDirty();
+		}
 	},
 };
 </script>
