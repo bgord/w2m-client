@@ -17,38 +17,36 @@
 				</button>
 			</div>
 		</div>
-		<transition name="appear-left" mode="out-in">
-			<div v-if=" !collapsed ">
-				<form @submit.prevent="editContext">
-					<input v-model="context" :class="{ 'view-item__input':true, 'view-item__input--changed':hasContextChanged}" @keyup.esc="context=''" ref="context" />
-					<button :disabled="editContextPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editContextPending}" type="submit">
-						SAVE CONTEXT
-					</button>
-				</form>
-				<form @submit.prevent="editTranslation">
-					<input v-model="translation" :class="{ 'view-item__input ':true, 'view-item__input--changed ':hasTranslationChanged}" @keyup.esc="translation=''" />
-					<button :disabled="editTranslationPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editTranslationPending}" type="submit">
-						SAVE TRANSLATION
-					</button>
-				</form>
-				<div v-if="resource.suggestedContexts.length" class="view-item__sugg-items__text">
-					Suggested contexts:
-				</div>
-				<ul v-if="resource.suggestedContexts.length" class="view-item__sugg-items__list">
-					<li v-for="(context, index) in resource.suggestedContexts" :key="index" @click="chooseContext(context)" class="view-item__sugg-items__item">
-						{{ context }}
-					</li>
-				</ul>
-				<div v-if="resource.suggestedTranslations.length" class="view-item__sugg-items__text">
-					Suggested translations:
-				</div>
-				<ul v-if="resource.suggestedTranslations.length" class="view-item__sugg-items__list">
-					<li v-for="(suggestion, index) in resource.suggestedTranslations" :key="index" @click="chooseSugestion(suggestion)" class="view-item__sugg-items__item">
-						{{ suggestion }}
-					</li>
-				</ul>
+		<div v-if=" !collapsed ">
+			<form @submit.prevent="editContext">
+				<input v-model="context" :class="{ 'view-item__input':true, 'view-item__input--changed':hasContextChanged}" @keyup.esc="context=''" ref="context" />
+				<button :disabled="editContextPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editContextPending}" type="submit">
+					SAVE CONTEXT
+				</button>
+			</form>
+			<form @submit.prevent="editTranslation">
+				<input v-model="translation" :class="{ 'view-item__input ':true, 'view-item__input--changed ':hasTranslationChanged}" @keyup.esc="translation=''" />
+				<button :disabled="editTranslationPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editTranslationPending}" type="submit">
+					SAVE TRANSLATION
+				</button>
+			</form>
+			<div v-if="resource.suggestedContexts.length" class="view-item__sugg-items__text">
+				Suggested contexts:
 			</div>
-		</transition>
+			<ul v-if="resource.suggestedContexts.length" class="view-item__sugg-items__list">
+				<li v-for="(context, index) in resource.suggestedContexts" :key="index" @click="chooseContext(context)" class="view-item__sugg-items__item">
+					{{ context }}
+				</li>
+			</ul>
+			<div v-if="resource.suggestedTranslations.length" class="view-item__sugg-items__text">
+				Suggested translations:
+			</div>
+			<ul v-if="resource.suggestedTranslations.length" class="view-item__sugg-items__list">
+				<li v-for="(suggestion, index) in resource.suggestedTranslations" :key="index" @click="chooseSugestion(suggestion)" class="view-item__sugg-items__item">
+					{{ suggestion }}
+				</li>
+			</ul>
+		</div>
 		<div class=" view-item__lower">
 			<div>
 				<div :class="{ 'view-item__lower__word-badge ':true, 'view-item__lower__word-badge--blurred': !resource.downloadResult}">{{ MP3Msg }}</div>
@@ -319,18 +317,5 @@ export default {
 			margin: 1px 1rem 0 0;
 		}
 	}
-}
-
-.appear-left-enter-active,
-.appear-left-leave-active {
-	transition: all 0.33s;
-}
-.appear-left-enter {
-	transform: translateY(-20px);
-}
-
-.appear-left-leave-to {
-	opacity: 0.3;
-	transform: translateY(5px);
 }
 </style>

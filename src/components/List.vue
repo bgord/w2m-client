@@ -149,14 +149,14 @@ export default {
 
 .grow-enter {
 	opacity: 0;
-	transform: scale(0.9);
+	transform: scale(0.95);
 }
 
 .grow-enter-active {
-	transition: all 1s;
+	transition: all 0.33s;
 }
 
 .grow-move {
-	transition: transform 0.5s;
+	transition: transform 0.33s;
 }
 </style>
