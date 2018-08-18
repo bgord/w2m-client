@@ -1,11 +1,11 @@
 <template>
-	<div class="prepare-words__container">
-		<div class="prepare-words__modal" @keydown.esc="closeModal(blockClose)" ref="modal" tabindex="-1">
+	<div class="prepare-words__container" @click="closeModal(blockClose)">
+		<div class="prepare-words__modal" @click.stop="()=>{}" @keydown.esc="closeModal(blockClose)" ref="modal" tabindex="-1">
 			<div class="prepare-words__modal__upper">
 				<div>
 					<h4 class="prepare-words__modal__upper__header">Words to archive</h4>
 				</div>
-				<button @click="closeModal(blockClose)" class="prepare-words__modal__upper__close">
+				<button @click.stop="closeModal(blockClose)" class="prepare-words__modal__upper__close">
 					Close
 				</button>
 			</div>
