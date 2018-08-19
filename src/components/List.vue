@@ -91,16 +91,6 @@ export default {
 					a.word.toLowerCase() > b.word.toLowerCase() ? 1 : -1,
 				"a-desc": (a, b) =>
 					a.word.toLowerCase() < b.word.toLowerCase() ? 1 : -1,
-				"t-min": (a, b) =>
-					a.suggested_translations.length >
-					b.suggested_translations.length
-						? 1
-						: -1,
-				"t-max": (a, b) =>
-					a.suggested_translations.length >
-					b.suggested_translations.length
-						? 1
-						: -1,
 			};
 			const filter = this.noTranslationOnlyValue
 				? e => !e.translation

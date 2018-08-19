@@ -5,12 +5,10 @@
 				<span class="sort-pane__sortby">SORT BY:</span>
 				<select class="sort-pane__select" :value="sortHashValue" @change="updateSortHashValue">
 					<option selected value="default">
-						-- --
+						-- 		--
 					</option>
 					<option value="a-asc">A - Z</option>
 					<option value="a-desc">Z - A</option>
-					<option value="t-min">Min translations</option>
-					<option value="t-max">Max translations</option>
 				</select>
 			</div>
 			<div class="sort-pane__checkbox-wrapper">
