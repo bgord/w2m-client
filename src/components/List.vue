@@ -40,7 +40,6 @@ export default {
 		return {
 			sortHashValue: "default",
 			noTranslationOnlyValue: false,
-			sorter: () => {},
 			currentHighlightedIndex: -1,
 			isCurrentWordDirty: false,
 			socket: io("localhost:8686"),
@@ -87,7 +86,7 @@ export default {
 		sortedData() {
 			const sorters = {
 				default: (a, b) =>
-					a.context.length < b.context.length ? 1 : -1,
+					a._id < b._id ? 1 : -1,
 				"a-asc": (a, b) =>
 					a.word.toLowerCase() > b.word.toLowerCase() ? 1 : -1,
 				"a-desc": (a, b) =>
