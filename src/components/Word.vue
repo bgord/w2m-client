@@ -25,7 +25,7 @@
 				</button>
 			</form>
 			<form @submit.prevent="editTranslation">
-				<input v-model="translation" :class="{ 'view-item__input ':true, 'view-item__input--changed ':hasTranslationChanged}" @keyup.esc="resetTranslation" />
+				<input v-model="translation" :class="{ 'view-item__input ':true, 'view-item__input--changed ':hasTranslationChanged}" @keyup.esc="resetTranslation" ref="translation" />
 				<button :disabled="editTranslationPending" :class="{ 'view-item__submit':true, 'view-item__submit--loading': editTranslationPending}" type="submit">
 					SAVE TRANSLATION
 				</button>
@@ -158,9 +158,11 @@ export default {
 		},
 		chooseSugestion(suggestion) {
 			this.translation += suggestion;
+			this.$refs.translation.focus();
 		},
 		chooseContext(context) {
 			this.context = context;
+			this.$refs.context.focus();
 		},
 	},
 	computed: {
@@ -291,7 +293,7 @@ export default {
 		}
 		&__item {
 			@include descriptive-text($c: #555);
-			padding-bottom:.5rem;
+			padding-bottom: 0.5rem;
 			&:hover {
 				cursor: pointer;
 				opacity: 0.85;
